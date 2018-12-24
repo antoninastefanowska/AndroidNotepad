@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".SzukajActivity">
+
+    <data>
+        <import
+            type="android.view.View" />
+        <variable
+            name="filtr"
+            type="com.tonia.notatnik.Filtr" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary"
+            android:orientation="vertical">
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorSecondary"
+                android:padding="@dimen/padding_big">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btZatwierdz"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:onClick="btZatwierdz_onClick"
+                        android:text="@string/zatwierdz_btn" />
+
+                    <Button
+                        android:id="@+id/btAnuluj"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:onClick="btAnuluj_onClick"
+                        android:text="@string/anuluj_btn" />
+
+                </LinearLayout>
+
+            </HorizontalScrollView>
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        style="@style/szukaj_container_style">
+
+                        <CheckBox
+                            android:id="@+id/cbTytul"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:checked="@={filtr.tytulWarunek}"
+                            android:text="@string/tytul" />
+
+                        <LinearLayout
+                            android:id="@+id/llTytul"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="@{filtr.tytulWarunek ? View.VISIBLE : View.GONE}">
+
+                            <EditText
+                                android:id="@+id/etTytul"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:ems="10"
+                                android:inputType="textPersonName"
+                                android:text="@={filtr.tytul}" />
+
+                            <RadioGroup
+                                android:id="@+id/rgTytul"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <RadioButton
+                                    android:id="@+id/rbTytulDokladny"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:checked="@={filtr.tytulDokladny}"
+                                    android:text="@string/dokladny_rb" />
+
+                                <RadioButton
+                                    android:id="@+id/rbTytulZawiera"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:checked="@={filtr.tytulZawiera}"
+                                    android:text="@string/zawiera_rb" />
+                            </RadioGroup>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        style="@style/szukaj_container_style">
+
+                        <CheckBox
+                            android:id="@+id/cbAutor"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:checked="@={filtr.autorWarunek}"
+                            android:text="@string/autor" />
+
+                        <EditText
+                            android:id="@+id/etAutor"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:inputType="textPersonName"
+                            android:text="@={filtr.autor}"
+                            android:visibility="@{filtr.autorWarunek ? View.VISIBLE : View.GONE}" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        style="@style/szukaj_container_style">
+
+                        <CheckBox
+                            android:id="@+id/cbSlowaKluczowe"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:checked="@={filtr.slowaKluczoweWarunek}"
+                            android:text="@string/slowakluczowe_cb" />
+
+                        <LinearLayout
+                            android:id="@+id/llSlowaKluczowe"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="@{filtr.slowaKluczoweWarunek ? View.VISIBLE : View.GONE}">
+
+                            <EditText
+                                android:id="@+id/etSlowaKluczowe"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@={filtr.slowaKluczowe}" />
+
+                            <RadioGroup
+                                android:id="@+id/rgSlowaKluczowe"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <RadioButton
+                                    android:id="@+id/rbSlowaKluczoweWszystkie"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:checked="@={filtr.slowaKluczoweWszystkie}"
+                                    android:text="@string/wszystkie_rb" />
+
+                                <RadioButton
+                                    android:id="@+id/rbSlowaKluczoweJakiekolwiek"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:checked="@={filtr.slowaKluczoweJakiekolwiek}"
+                                    android:text="@string/jakiekolwiek_rb" />
+
+                            </RadioGroup>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        style="@style/szukaj_container_style">
+
+                        <CheckBox
+                            android:id="@+id/cbKategoria"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:checked="@={filtr.kategoriaWarunek}"
+                            android:text="@string/kategoria" />
+
+                        <Spinner
+                            android:id="@+id/spKategoria"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:visibility="@{filtr.kategoriaWarunek ? View.VISIBLE : View.GONE}" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        style="@style/szukaj_container_style">
+
+                        <CheckBox
+                            android:id="@+id/cbDataUtworzenia"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:checked="@={filtr.dataUtworzeniaWarunek}"
+                            android:text="@string/datautworzenia_cb" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="@{filtr.dataUtworzeniaWarunek ? View.VISIBLE : View.GONE}">
+
+                            <CheckBox
+                                android:id="@+id/cbDataUtworzeniaOd"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:checked="@={filtr.dataUtworzeniaOdWarunek}"
+                                android:text="@string/od_cb" />
+
+                            <CalendarView
+                                android:id="@+id/cvDataUtworzeniaOd"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:date="@={filtr.dataUtworzeniaOd}"
+                                android:foregroundGravity="center"
+                                android:visibility="@{filtr.dataUtworzeniaOdWarunek ? View.VISIBLE : View.GONE}" />
+
+                            <CheckBox
+                                android:id="@+id/cbDataUtworzeniaDo"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:checked="@={filtr.dataUtworzeniaDoWarunek}"
+                                android:text="@string/do_cb" />
+
+                            <CalendarView
+                                android:id="@+id/cvDataUtworzeniaDo"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:date="@={filtr.dataUtworzeniaDo}"
+                                android:foregroundGravity="center"
+                                android:visibility="@{filtr.dataUtworzeniaDoWarunek ? View.VISIBLE : View.GONE}" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        style="@style/szukaj_container_style" >
+
+                        <CheckBox
+                            android:id="@+id/cbDataModyfikacji"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:checked="@={filtr.dataModyfikacjiWarunek}"
+                            android:text="@string/datamodyfikacji_cb" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="@{filtr.dataModyfikacjiWarunek ? View.VISIBLE : View.GONE}">
+
+                            <CheckBox
+                                android:id="@+id/cbDataModyfikacjiOd"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:checked="@={filtr.dataModyfikacjiOdWarunek}"
+                                android:text="@string/od_cb" />
+
+                            <CalendarView
+                                android:id="@+id/cvDataModyfikacjiOd"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:date="@={filtr.dataModyfikacjiOd}"
+                                android:foregroundGravity="center"
+                                android:visibility="@{filtr.dataModyfikacjiOdWarunek ? View.VISIBLE : View.GONE}" />
+
+                            <CheckBox
+                                android:id="@+id/cbDataModyfikacjiDo"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:checked="@={filtr.dataModyfikacjiDoWarunek}"
+                                android:text="@string/do_cb" />
+
+                            <CalendarView
+                                android:id="@+id/cvDataModyfikacjiDo"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:date="@={filtr.dataModyfikacjiDo}"
+                                android:foregroundGravity="center"
+                                android:visibility="@{filtr.dataModyfikacjiDoWarunek ? View.VISIBLE : View.GONE}" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        style="@style/szukaj_container_style">
+
+                        <CheckBox
+                            android:id="@+id/cbWyroznienie"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/wyroznienie_cb"
+                            android:checked="@={filtr.wyroznienieWarunek}" />
+
+                        <RadioGroup
+                            android:id="@+id/rgWyroznienie"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:visibility="@{filtr.wyroznienieWarunek ? View.VISIBLE : View.GONE}">
+
+                            <RadioButton
+                                android:id="@+id/WyroznienieTak"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/tak"
+                                android:checked="@={filtr.wyroznienie}" />
+
+                            <RadioButton
+                                android:id="@+id/WyroznienieNie"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/nie" />
+
+                        </RadioGroup>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
+</layout>

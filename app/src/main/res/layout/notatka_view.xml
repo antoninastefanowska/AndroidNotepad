@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <import
+            type="android.view.View" />
+        <import
+            type="android.view.ViewGroup.LayoutParams" />
+        <variable
+            name="notatka"
+            type="com.tonia.notatnik.Notatka" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/llNotatkaViewContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@{notatka.czyZaznaczona() ? @drawable/background_notatka_item_checked : @drawable/background_notatka_item}"
+        android:orientation="horizontal"
+        android:onClick="tvNotatkaViewTytul_onClick"
+        android:layout_marginBottom="@dimen/margin_small" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_notatka_border"
+            android:orientation="horizontal" >
+
+            <CheckedTextView
+                android:id="@+id/tvNotatkaViewTytul"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:checkMark="@drawable/background_notatka_item_checked"
+                android:textColor="@color/colorSecondary"
+                android:textSize="@dimen/text_size_big"
+                android:textStyle="bold"
+                android:text="@{notatka.getTytul()}" />
+
+            <ImageView
+                android:id="@+id/ivNotatkaViewIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

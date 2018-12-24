@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".NotatnikActivity" >
+
+    <data>
+        <variable
+            name="zaznaczoneNotatki"
+            type="int" />
+        <variable
+            name="notatkiAdapter"
+            type="com.tonia.notatnik.NotatkiAdapter" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/clMain"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary"
+            android:orientation="vertical">
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorSecondary"
+                android:padding="@dimen/padding_big"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btDodaj"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:onClick="btDodaj_onClick"
+                        android:text="@string/dodaj_btn" />
+
+                    <Button
+                        android:id="@+id/btUsun"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:onClick="btUsun_onClick"
+                        android:text="@string/usun_btn"
+                        android:enabled="@{zaznaczoneNotatki > 0}" />
+
+                    <Button
+                        android:id="@+id/btEdytuj"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:onClick="btEdytuj_onClick"
+                        android:text="@string/edytuj_btn"
+                        android:enabled="@{zaznaczoneNotatki == 1}" />
+
+                    <Button
+                        android:id="@+id/btWyroznij"
+                        android:layout_width="@dimen/icon_size"
+                        android:layout_height="@dimen/icon_size"
+                        android:layout_weight="1"
+                        android:enabled="@{zaznaczoneNotatki > 0}"
+                        android:background="@drawable/star_button_icon"
+                        android:onClick="btWyroznij_onClick" />
+
+                    <Button
+                        android:id="@+id/btSzukaj"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/szukaj_btn"
+                        android:onClick="btSzukaj_onClick" />
+
+                    <Button
+                        android:id="@+id/btLink"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:onClick="btLink_onClick"
+                        android:text="@string/link_btn" />
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvNotatki"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/margin_big"
+                android:background="@drawable/layout_bg"
+                android:clipChildren="true"
+                android:scrollbars="vertical"
+                android:adapter="@{notatkiAdapter}" >
+
+            </android.support.v7.widget.RecyclerView>
+
+        </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
+</layout>

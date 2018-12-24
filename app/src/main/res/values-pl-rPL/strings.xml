@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">Notatnik</string>
+
+    <string name="dodaj_btn">Dodaj</string>
+    <string name="edytuj_btn">Edytuj</string>
+    <string name="usun_btn">Usuń</string>
+    <string name="wyroznij_btn">Wyróżnij</string>
+    <string name="szukaj_btn">Szukaj</string>
+    <string name="link_btn">Link</string>
+    <string name="zapisz_btn">Zapisz</string>
+    <string name="odrzuc_btn">Odrzuć</string>
+    <string name="zatwierdz_btn">Zatwierdź</string>
+    <string name="anuluj_btn">Anuluj</string>
+
+    <string name="tytul">Tytuł</string>
+    <string name="autor">Autor</string>
+    <string name="kategoria">Kategoria</string>
+
+    <string name="dokladny_rb">Dokładny</string>
+    <string name="zawiera_rb">Zawiera</string>
+    <string name="slowakluczowe_cb">Słowa kluczowe</string>
+    <string name="wszystkie_rb">Wszystkie</string>
+    <string name="jakiekolwiek_rb">Jakiekolwiek</string>
+    <string name="datautworzenia_cb">Data utworzenia</string>
+    <string name="datamodyfikacji_cb">Data modyfikacji</string>
+    <string name="od_cb">Od</string>
+    <string name="do_cb">Do</string>
+    <string name="wyroznienie_cb">Wyróżnienie</string>
+    <string name="tak">Tak</string>
+    <string name="nie">Nie</string>
+
+    <string name="dodano_msg">Dodano notatkę %s.</string>
+    <string name="edytowano_msg">Edytowano notatkę %s.</string>
+    <plurals name="usunieto_msg">
+        <item quantity="one">Usunięto %d notatkę.</item>
+        <item quantity="few">Usunięto %d notatki.</item>
+        <item quantity="many">Usunięto %d notatek.</item>
+    </plurals>
+    <plurals name="znaleziono_msg">
+        <item quantity="one">Znaleziono %d notatkę.</item>
+        <item quantity="few">Znaleziono %d notatki.</item>
+        <item quantity="many">Znaleziono %d notatek.</item>
+    </plurals>
+</resources>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Notepad</string>
+
+    <string name="dodaj_btn">Add</string>
+    <string name="edytuj_btn">Edit</string>
+    <string name="usun_btn">Delete</string>
+    <string name="wyroznij_btn">Favorite</string>
+    <string name="szukaj_btn">Find</string>
+    <string name="link_btn">Link</string>
+    <string name="zapisz_btn">Save</string>
+    <string name="odrzuc_btn">Discard</string>
+    <string name="zatwierdz_btn">OK</string>
+    <string name="anuluj_btn">Cancel</string>
+
+    <string name="tytul">Title</string>
+    <string name="autor">Author</string>
+    <string name="kategoria">Cathegory</string>
+    <string name="dokladny_rb">Exact</string>
+    <string name="zawiera_rb">Includes</string>
+    <string name="slowakluczowe_cb">Keywords</string>
+    <string name="wszystkie_rb">All</string>
+    <string name="jakiekolwiek_rb">Any</string>
+    <string name="datautworzenia_cb">Creation date</string>
+    <string name="datamodyfikacji_cb">Modification date</string>
+    <string name="od_cb">From</string>
+    <string name="do_cb">To</string>
+    <string name="wyroznienie_cb">Favorite</string>
+    <string name="tak">Yes</string>
+    <string name="nie">No</string>
+
+    <string name="dodano_msg">Note %s has been added.</string>
+    <string name="edytowano_msg">Note %s has been edited.</string>
+    <plurals name="usunieto_msg">
+        <item quantity="one">%d note has been deleted.</item>
+        <item quantity="other">%d notes have been deleted.</item>
+    </plurals>
+    <plurals name="znaleziono_msg">
+        <item quantity="one">Found %d note.</item>
+        <item quantity="other">Found %d notes.</item>
+    </plurals>
+</resources>
