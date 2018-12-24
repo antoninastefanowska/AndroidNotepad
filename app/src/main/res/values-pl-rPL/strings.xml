@@ -9,6 +9,8 @@
     <string name="link_btn">Link</string>
     <string name="zapisz_btn">Zapisz</string>
     <string name="odrzuc_btn">Odrzuć</string>
+    <string name="zablokuj_btn">Zablokuj</string>
+    <string name="odblokuj_btn">Usuń blokadę</string>
     <string name="zatwierdz_btn">Zatwierdź</string>
     <string name="anuluj_btn">Anuluj</string>
 
@@ -41,4 +43,11 @@
         <item quantity="few">Znaleziono %d notatki.</item>
         <item quantity="many">Znaleziono %d notatek.</item>
     </plurals>
+    <string name="brak_zabezpieczen_msg">Blokowanie ekranu nie jest włączone w Ustawieniach</string>
+    <string name="brak_czytnika_msg">Brak zezwolenia na autentykację odciskiem palca</string>
+    <string name="brak_instancji_msg">Nie udało się pobrać instancji KeyGenerator</string>
+    <string name="brak_odciskow_msg">Zarejestruj przynajmniej jeden odcisk palca w Ustawieniach</string>
+    <string name="brak_autentykacji_msg">Błąd autentykacji</string>
+    <string name="autentykacja_pomyslna_msg">Autentykacja pomyślna</string>
+    <string name="dotknij_czujnika">Dotknij czujnika</string>
 </resources>

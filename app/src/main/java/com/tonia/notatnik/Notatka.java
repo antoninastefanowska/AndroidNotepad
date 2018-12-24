@@ -52,6 +52,9 @@ public class Notatka extends BaseObservable implements Serializable {
     @SerializedName("ikonka")
     private String ikonka;
 
+    @ColumnInfo(name = "zablokowana")
+    private boolean zablokowana;
+
     @Ignore
     private boolean zaznaczona;
 
@@ -115,6 +118,10 @@ public class Notatka extends BaseObservable implements Serializable {
     public String getIkonka() { return ikonka; }
 
     public void setIkonka(String ikonka) { this.ikonka = ikonka; }
+
+    public boolean getZablokowana() { return zablokowana; }
+
+    public void setZablokowana(boolean zablokowana) { this.zablokowana = zablokowana; }
 
     public void przepisz(Notatka notatka) {
         this.tytul = notatka.tytul;

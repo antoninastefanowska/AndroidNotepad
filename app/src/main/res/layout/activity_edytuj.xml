@@ -45,6 +45,22 @@
                         android:onClick="btOdrzuc_onClick"
                         android:text="@string/odrzuc_btn" />
 
+                    <Button
+                        android:id="@+id/btZablokuj"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:enabled="@{!notatka.getZablokowana()}"
+                        android:onClick="btZablokuj_onClick"
+                        android:text="@string/zablokuj_btn" />
+
+                    <Button
+                        android:id="@+id/btOdblokuj"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:enabled="@{notatka.getZablokowana()}"
+                        android:onClick="btOdblokuj_onClick"
+                        android:text="@string/odblokuj_btn" />
+
                 </LinearLayout>
 
             </HorizontalScrollView>

@@ -58,13 +58,12 @@ public class NotatnikActivity extends AppCompatActivity {
         notatkiViewModel.getAllData().observe(this, new Observer<List<Notatka>>() {
             @Override
             public void onChanged(@Nullable final List<Notatka> zaladowaneNotatki) {
-                /*
                 notatki = zaladowaneNotatki;
                 notatkiAdapter.setData(notatki);
                 if (!czyZaladowane) {
                     notatkiAdapter.notifyDataSetChanged();
                     czyZaladowane = true;
-                } */
+                }
             }
         });
 
@@ -78,8 +77,8 @@ public class NotatnikActivity extends AppCompatActivity {
         binding.setZaznaczoneNotatki(notatkiAdapter.getZaznaczoneNotatki().size());
         binding.setNotatkiAdapter(notatkiAdapter);
 
-        notatkiController = new NotatkiController(notatkiAdapter);
-        notatkiController.start();
+        //notatkiController = new NotatkiController(notatkiAdapter);
+        //notatkiController.start();
     }
 
     public void btDodaj_onClick(View view) {

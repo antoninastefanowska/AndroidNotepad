@@ -10,6 +10,8 @@
     <string name="link_btn">Link</string>
     <string name="zapisz_btn">Save</string>
     <string name="odrzuc_btn">Discard</string>
+    <string name="zablokuj_btn">Lock</string>
+    <string name="odblokuj_btn">Remove lock</string>
     <string name="zatwierdz_btn">OK</string>
     <string name="anuluj_btn">Cancel</string>
 
@@ -39,4 +41,11 @@
         <item quantity="one">Found %d note.</item>
         <item quantity="other">Found %d notes.</item>
     </plurals>
+    <string name="brak_zabezpieczen_msg">Lock screen security not enabled in Settings</string>
+    <string name="brak_czytnika_msg">Fingerprint authentication permission not enabled</string>
+    <string name="brak_instancji_msg">Failed to get KeyGenerator instance</string>
+    <string name="brak_odciskow_msg">Register at least one fingerprint in Settings</string>
+    <string name="brak_autentykacji_msg">Authentication failed</string>
+    <string name="autentykacja_pomyslna_msg">Authentication succeed</string>
+    <string name="dotknij_czujnika">Touch sensor</string>
 </resources>
