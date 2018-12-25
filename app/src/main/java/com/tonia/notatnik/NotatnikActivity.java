@@ -3,7 +3,6 @@ package com.tonia.notatnik;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
-import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.Snackbar;
@@ -12,21 +11,16 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 import android.databinding.DataBindingUtil;
 
-import com.google.gson.Gson;
 import com.tonia.notatnik.databinding.ActivityNotatnikBinding;
 
-import java.util.Calendar;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.regex.Pattern;
 
 public class NotatnikActivity extends AppCompatActivity {
     public final static int DODAJ = 1, EDYTUJ = 2, SZUKAJ = 3;
@@ -58,9 +52,9 @@ public class NotatnikActivity extends AppCompatActivity {
         notatkiViewModel.getAllData().observe(this, new Observer<List<Notatka>>() {
             @Override
             public void onChanged(@Nullable final List<Notatka> zaladowaneNotatki) {
-                notatki = zaladowaneNotatki;
-                notatkiAdapter.setData(notatki);
                 if (!czyZaladowane) {
+                    notatki = zaladowaneNotatki;
+                    notatkiAdapter.setData(notatki);
                     notatkiAdapter.notifyDataSetChanged();
                     czyZaladowane = true;
                 }
@@ -98,7 +92,7 @@ public class NotatnikActivity extends AppCompatActivity {
     public void btUsun_onClick(View view) {
         for (Notatka zaznaczonaNotatka : notatkiAdapter.getZaznaczoneNotatki()) {
             notatkiAdapter.removeItem(zaznaczonaNotatka);
-            //notatkiViewModel.delete(zaznaczonaNotatka);
+            notatkiViewModel.delete(zaznaczonaNotatka);
         }
 
         int usuniete = notatkiAdapter.getZaznaczoneNotatki().size();
@@ -131,24 +125,12 @@ public class NotatnikActivity extends AppCompatActivity {
         notatkiAdapter.wyroznij();
     }
 
-    public void btLink_onClick(View view) {
-        Notatka notatka = notatkiAdapter.getZaznaczoneNotatki().get(0);
-        String youtubeLink = "^(https?)?(://)?(www.)?(m.)?((youtube.com)|(youtu.be))/";
-        Intent link = null;
-
-        if (Patterns.WEB_URL.matcher(notatka.getTekst()).matches()) {
-            link = new Intent(Intent.ACTION_VIEW, Uri.parse(notatka.getTekst()));
-            link.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            if (Pattern.matches(youtubeLink, notatka.getTekst()))
-                link.setPackage("com.google.android.youtube");
-        }
-        startActivity(link);
-    }
-
     public void tvNotatkaViewTytul_onClick(View view) {
         LinearLayout notatkaContainer = (LinearLayout)view;
-        int zaznaczonyIndeks = notatkiRecyclerView.getChildAdapterPosition(notatkaContainer);
-        Notatka notatka = notatkiAdapter.getItem(zaznaczonyIndeks);
+        //int zaznaczonyIndeks = notatkiRecyclerView.getChildAdapterPosition(notatkaContainer);
+        //Notatka notatka = notatkiAdapter.getItem(zaznaczonyIndeks);
+        NotatkiAdapter.NotatkiViewHolder vh = (NotatkiAdapter.NotatkiViewHolder)notatkiRecyclerView.getChildViewHolder(notatkaContainer);
+        Notatka notatka = vh.binding.getNotatka();
 
         notatkiAdapter.selectItem(notatka);
         binding.setZaznaczoneNotatki(notatkiAdapter.getZaznaczoneNotatki().size());
@@ -164,8 +146,9 @@ public class NotatnikActivity extends AppCompatActivity {
                     ConstraintLayout mainContainer = (ConstraintLayout)findViewById(R.id.clMain);
                     String message = getResources().getString(R.string.dodano_msg, notatka.getTytul());
                     Snackbar snackbar = Snackbar.make(mainContainer, message, Snackbar.LENGTH_SHORT);
+                    long id = notatkiViewModel.insert(notatka);
+                    notatka.setId(id);
                     notatkiAdapter.addItem(notatka);
-                    //notatkiViewModel.insert(notatka);
                     snackbar.show();
                 } break;
 
@@ -175,7 +158,7 @@ public class NotatnikActivity extends AppCompatActivity {
                     String message = getResources().getString(R.string.edytowano_msg, staraNotatka.getTytul());
                     Snackbar snackbar = Snackbar.make(mainContainer, message, Snackbar.LENGTH_SHORT);
                     notatkiAdapter.editItem(staraNotatka, notatka);
-                    //notatkiViewModel.update(staraNotatka);
+                    notatkiViewModel.update(staraNotatka);
                     snackbar.show();
                 } break;
 

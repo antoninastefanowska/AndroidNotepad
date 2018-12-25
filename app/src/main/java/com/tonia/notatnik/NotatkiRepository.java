@@ -3,7 +3,6 @@ package com.tonia.notatnik;
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -26,9 +25,7 @@ public class NotatkiRepository {
         int result = 0;
         try {
             result = new CountAsyncTask(notatkiDao).execute().get();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
+        } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
         return result;
@@ -47,15 +44,22 @@ public class NotatkiRepository {
         }
     }
 
-    public void insert(Notatka notatka) {
-        new InsertAsyncTask(notatkiDao).execute(notatka);
+    Long insert(Notatka notatka) {
+        Long id = null;
+        try {
+            id = new InsertAsyncTask(notatkiDao).execute(notatka).get();
+        }
+        catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        return id;
     }
 
     public void delete(Notatka notatka) { new DeleteAsyncTask(notatkiDao).execute(notatka); }
 
     public void update(Notatka notatka) { new UpdateAsyncTask(notatkiDao).execute(notatka); }
 
-    private static class InsertAsyncTask extends AsyncTask<Notatka, Void, Void> {
+    private static class InsertAsyncTask extends AsyncTask<Notatka, Void, Long> {
         private NotatkiDao notatkiDao;
 
         public InsertAsyncTask(NotatkiDao dao) {
@@ -63,9 +67,8 @@ public class NotatkiRepository {
         }
 
         @Override
-        protected Void doInBackground(final Notatka... params) {
-            notatkiDao.insert(params[0]);
-            return null;
+        protected Long doInBackground(final Notatka... params) {
+            return notatkiDao.insert(params[0]);
         }
     }
 

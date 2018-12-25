@@ -29,20 +29,16 @@ import javax.crypto.SecretKey;
 
 public class BlokadaActivity extends AppCompatActivity {
     private static final String KEY_NAME = "example_key";
-    private FingerprintManager fingerprintManager;
-    private KeyguardManager keyguardManager;
     private KeyStore keyStore;
-    private KeyGenerator keyGenerator;
     private Cipher cipher;
-    private FingerprintManager.CryptoObject cryptoObject;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_blokada);
 
-        keyguardManager = (KeyguardManager)getSystemService(KEYGUARD_SERVICE);
-        fingerprintManager = (FingerprintManager)getSystemService(FINGERPRINT_SERVICE);
+        KeyguardManager keyguardManager = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
+        FingerprintManager fingerprintManager = (FingerprintManager) getSystemService(FINGERPRINT_SERVICE);
 
         if (!keyguardManager.isKeyguardSecure()) {
             Toast.makeText(this, R.string.brak_zabezpieczen_msg, Toast.LENGTH_LONG).show();
@@ -62,7 +58,7 @@ public class BlokadaActivity extends AppCompatActivity {
         generateKey();
 
         if (cipherInit()) {
-            cryptoObject = new FingerprintManager.CryptoObject(cipher);
+            FingerprintManager.CryptoObject cryptoObject = new FingerprintManager.CryptoObject(cipher);
             Blokada helper = new Blokada(this);
             helper.startAuth(fingerprintManager, cryptoObject);
         }
@@ -75,6 +71,7 @@ public class BlokadaActivity extends AppCompatActivity {
         catch (Exception e) {
             e.printStackTrace();;
         }
+        KeyGenerator keyGenerator;
         try {
             keyGenerator = KeyGenerator.getInstance(KeyProperties.KEY_ALGORITHM_AES, "AndroidKeyStore");
         }

@@ -2,6 +2,9 @@ package com.tonia.notatnik;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.tonia.notatnik.Notatka;
+import com.tonia.notatnik.NotatkiAPI;
+import com.tonia.notatnik.NotatkiAdapter;
 
 import java.util.List;
 

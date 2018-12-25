@@ -7,6 +7,8 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
+import com.tonia.notatnik.Notatka;
+
 import java.util.List;
 
 @Dao
@@ -18,7 +20,7 @@ public interface NotatkiDao {
     int count();
 
     @Insert
-    void insert(Notatka notatka);
+    long insert(Notatka notatka);
 
     @Delete
     void delete(Notatka notatka);

@@ -29,13 +29,14 @@
                 android:layout_width="@dimen/icon_size_big"
                 android:layout_height="@dimen/icon_size_big"
                 android:scaleType="centerCrop"
-                android:src="@drawable/fingerprint_icon" />
+                android:src="@drawable/icon_fingerprint" />
 
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/dotknij_czujnika"
+                android:textFontWeight="bold"
                 android:textSize="@dimen/text_size_big" />
 
         </LinearLayout>

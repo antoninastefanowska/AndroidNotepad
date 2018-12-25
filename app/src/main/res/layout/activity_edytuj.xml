@@ -24,26 +24,33 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorSecondary"
-                android:padding="@dimen/padding_big">
+                android:padding="@dimen/padding_small">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:orientation="horizontal">
 
                     <Button
                         android:id="@+id/btZapisz"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/icon_size"
+                        android:layout_height="@dimen/icon_size"
+                        android:layout_margin="@dimen/margin_small"
                         android:onClick="btZapisz_onClick"
-                        android:text="@string/zapisz_btn" />
+                        android:tooltipText="@string/zapisz_btn"
+                        android:background="@drawable/button_floppydisc"
+                        android:enabled="false" />
 
                     <Button
                         android:id="@+id/btAnuluj"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/icon_size"
+                        android:layout_height="@dimen/icon_size"
+                        android:layout_margin="@dimen/margin_small"
                         android:onClick="btOdrzuc_onClick"
-                        android:text="@string/odrzuc_btn" />
+                        android:tooltipText="@string/odrzuc_btn"
+                        android:background="@drawable/button_cross"
+                        android:enabled="false" />
 
                     <Button
                         android:id="@+id/btZablokuj"

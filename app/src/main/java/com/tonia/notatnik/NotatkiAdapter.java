@@ -5,16 +5,11 @@ import com.bumptech.glide.request.RequestOptions;
 import com.tonia.notatnik.databinding.NotatkaViewBinding;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckedTextView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -100,7 +95,7 @@ public class NotatkiAdapter extends RecyclerView.Adapter<NotatkiAdapter.NotatkiV
 
     public void selectItem(Notatka notatka) {
         int position = notatki.indexOf(notatka);
-        if (notatka.czyZaznaczona()) {
+        if (notatka.getZaznaczona()) {
             notatka.setZaznaczona(false);
             zaznaczoneNotatki.remove(notatka);
         }

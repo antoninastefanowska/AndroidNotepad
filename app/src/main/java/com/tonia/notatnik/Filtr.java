@@ -2,13 +2,10 @@ package com.tonia.notatnik;
 
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
-import android.util.Log;
 
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
 
 public class Filtr extends BaseObservable implements Serializable {
     private boolean tytulWarunek;
@@ -256,9 +253,6 @@ public class Filtr extends BaseObservable implements Serializable {
 
         if (kategoriaWarunek)
             if (kategoria != notatka.getKategoria()) return false;
-
-        if (dataUtworzeniaOd.after(notatka.getDataUtworzenia()))
-            Log.d("hej", dataUtworzeniaOd.toString() + " " + notatka.getDataUtworzenia().toString());
 
         if (dataUtworzeniaWarunek) {
             if (dataUtworzeniaOdWarunek)

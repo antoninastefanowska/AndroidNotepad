@@ -15,7 +15,7 @@
         android:id="@+id/llNotatkaViewContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@{notatka.czyZaznaczona() ? @drawable/background_notatka_item_checked : @drawable/background_notatka_item}"
+        android:background="@{notatka.getZaznaczona() ? @drawable/background_notatka_item_checked : @drawable/background_notatka_item}"
         android:orientation="horizontal"
         android:onClick="tvNotatkaViewTytul_onClick"
         android:layout_marginBottom="@dimen/margin_small" >

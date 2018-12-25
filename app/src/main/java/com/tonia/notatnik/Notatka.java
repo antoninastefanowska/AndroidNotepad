@@ -2,7 +2,6 @@ package com.tonia.notatnik;
 
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
-import android.support.annotation.NonNull;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
@@ -18,7 +17,7 @@ import java.util.Calendar;
 public class Notatka extends BaseObservable implements Serializable {
     @PrimaryKey(autoGenerate = true)
     @SerializedName("id")
-    private int id;
+    private long id;
 
     @ColumnInfo(name = "tytul")
     @SerializedName("tytul")
@@ -67,13 +66,14 @@ public class Notatka extends BaseObservable implements Serializable {
         autor = "Anonimowy";
         tytul = "[BEZ TYTUŁU]";
         zaznaczona = false;
+        zablokowana = false;
     }
 
     public Notatka(Notatka notatka) { przepisz(notatka); }
 
-    public int getId() { return id; }
+    public long getId() { return id; }
 
-    public void setId(int id) { this.id = id; }
+    public void setId(long id) { this.id = id; }
 
     @Bindable
     public String getTytul() { return tytul; }
@@ -113,7 +113,11 @@ public class Notatka extends BaseObservable implements Serializable {
     public boolean getWyroznienie() { return wyroznienie; }
 
     @Bindable
-    public void setWyroznienie(boolean wyroznienie) { this.wyroznienie = wyroznienie; }
+    public void setWyroznienie(boolean wyroznienie)
+    {
+        this.wyroznienie = wyroznienie;
+        notifyPropertyChanged(BR.notatka);
+    }
 
     public String getIkonka() { return ikonka; }
 
@@ -121,7 +125,11 @@ public class Notatka extends BaseObservable implements Serializable {
 
     public boolean getZablokowana() { return zablokowana; }
 
-    public void setZablokowana(boolean zablokowana) { this.zablokowana = zablokowana; }
+    public void setZablokowana(boolean zablokowana)
+    {
+        this.zablokowana = zablokowana;
+        notifyPropertyChanged(BR.notatka);
+    }
 
     public void przepisz(Notatka notatka) {
         this.tytul = notatka.tytul;
@@ -131,11 +139,16 @@ public class Notatka extends BaseObservable implements Serializable {
         this.wyroznienie = notatka.wyroznienie;
         this.dataUtworzenia = notatka.dataUtworzenia;
         this.dataModyfikacji = Calendar.getInstance().getTime();
+        this.zablokowana = notatka.zablokowana;
     }
 
-    public boolean czyZaznaczona() { return zaznaczona; }
+    public boolean getZaznaczona() { return zaznaczona; }
 
-    public void setZaznaczona(boolean zaznaczona) { this.zaznaczona = zaznaczona; }
+    public void setZaznaczona(boolean zaznaczona)
+    {
+        this.zaznaczona = zaznaczona;
+        notifyPropertyChanged(BR.notatka);
+    }
 
     @Override
     public String toString() {

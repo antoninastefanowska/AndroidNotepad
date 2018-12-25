@@ -25,8 +25,8 @@ public class NotatkiViewModel extends AndroidViewModel {
         return notatkiRepository.count();
     }
 
-    public void insert(Notatka notatka) {
-        notatkiRepository.insert(notatka);
+    public long insert(Notatka notatka) {
+        return notatkiRepository.insert(notatka);
     }
 
     public void delete(Notatka notatka) { notatkiRepository.delete(notatka); }

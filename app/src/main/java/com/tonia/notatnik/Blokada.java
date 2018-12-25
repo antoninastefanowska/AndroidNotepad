@@ -10,6 +10,8 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
+import com.tonia.notatnik.R;
+
 import static android.app.Activity.RESULT_OK;
 
 public class Blokada extends FingerprintManager.AuthenticationCallback {

@@ -6,12 +6,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.tonia.notatnik.Filtr;
+import com.tonia.notatnik.R;
 import com.tonia.notatnik.databinding.ActivitySzukajBinding;
 
 public class SzukajActivity extends AppCompatActivity {
-
     private Filtr filtr;
-    ActivitySzukajBinding binding;
+    private ActivitySzukajBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

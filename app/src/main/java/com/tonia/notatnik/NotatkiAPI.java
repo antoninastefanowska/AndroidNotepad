@@ -1,5 +1,7 @@
 package com.tonia.notatnik;
 
+import com.tonia.notatnik.Notatka;
+
 import java.util.List;
 
 import retrofit2.Call;

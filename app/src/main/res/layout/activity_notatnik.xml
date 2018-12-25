@@ -28,62 +28,63 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorSecondary"
-                android:padding="@dimen/padding_big"
+                android:padding="@dimen/padding_small"
                 android:scrollbars="none">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:orientation="horizontal">
 
                     <Button
                         android:id="@+id/btDodaj"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/icon_size"
+                        android:layout_height="@dimen/icon_size"
+                        android:layout_margin="@dimen/margin_small"
                         android:onClick="btDodaj_onClick"
-                        android:text="@string/dodaj_btn" />
+                        android:tooltipText="@string/dodaj_btn"
+                        android:background="@drawable/button_plus" />
 
                     <Button
                         android:id="@+id/btUsun"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/icon_size"
+                        android:layout_height="@dimen/icon_size"
+                        android:layout_margin="@dimen/margin_small"
                         android:onClick="btUsun_onClick"
-                        android:text="@string/usun_btn"
+                        android:tooltipText="@string/usun_btn"
+                        android:background="@drawable/button_minus"
                         android:enabled="@{zaznaczoneNotatki > 0}" />
 
                     <Button
                         android:id="@+id/btEdytuj"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:layout_width="@dimen/icon_size"
+                        android:layout_height="@dimen/icon_size"
+                        android:layout_margin="@dimen/margin_small"
                         android:onClick="btEdytuj_onClick"
-                        android:text="@string/edytuj_btn"
+                        android:tooltipText="@string/edytuj_btn"
+                        android:background="@drawable/button_pencil"
                         android:enabled="@{zaznaczoneNotatki == 1}" />
 
                     <Button
                         android:id="@+id/btWyroznij"
                         android:layout_width="@dimen/icon_size"
                         android:layout_height="@dimen/icon_size"
-                        android:layout_weight="1"
+                        android:layout_margin="@dimen/margin_small"
                         android:enabled="@{zaznaczoneNotatki > 0}"
-                        android:background="@drawable/star_button_icon"
+                        android:tooltipText="@string/wyroznij_btn"
+                        android:background="@drawable/button_star"
                         android:onClick="btWyroznij_onClick" />
 
                     <Button
                         android:id="@+id/btSzukaj"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/icon_size"
+                        android:layout_height="@dimen/icon_size"
+                        android:layout_margin="@dimen/margin_small"
                         android:layout_weight="1"
-                        android:text="@string/szukaj_btn"
+                        android:tooltipText="@string/szukaj_btn"
+                        android:background="@drawable/button_magnifier"
                         android:onClick="btSzukaj_onClick" />
-
-                    <Button
-                        android:id="@+id/btLink"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:onClick="btLink_onClick"
-                        android:text="@string/link_btn" />
                 </LinearLayout>
             </HorizontalScrollView>
 
