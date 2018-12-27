@@ -12,12 +12,12 @@ public class NotatkiRepository {
     private LiveData<List<Notatka>> notatki;
 
     public NotatkiRepository(Application application) {
-        NotatkiDatabase db = NotatkiDatabase.getDatabase(application);
+        NotatnikDatabase db = NotatnikDatabase.getDatabase(application);
         notatkiDao = db.notatkiDao();
-        notatki = notatkiDao.getAllData();
+        notatki = notatkiDao.getNotatki();
     }
 
-    public LiveData<List<Notatka>> getAllData() {
+    public LiveData<List<Notatka>> getNotatki() {
         return notatki;
     }
 

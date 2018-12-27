@@ -1,5 +1,6 @@
 package com.tonia.notatnik;
 
+import android.arch.persistence.room.ForeignKey;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 import android.arch.persistence.room.ColumnInfo;
@@ -13,7 +14,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Calendar;
 
-@Entity(tableName = "notatka")
+@Entity(tableName = "notatka", foreignKeys = @ForeignKey(entity = Kategoria.class, parentColumns = "id", childColumns = "kategoria_id"))
 public class Notatka extends BaseObservable implements Serializable {
     @PrimaryKey(autoGenerate = true)
     @SerializedName("id")
@@ -31,9 +32,9 @@ public class Notatka extends BaseObservable implements Serializable {
     @SerializedName("tekst")
     private String tekst;
 
-    @ColumnInfo(name = "kategoria")
+    @ColumnInfo(name = "kategoria_id")
     @SerializedName("kategoria")
-    private String kategoria;
+    private long kategoriaId;
 
     @ColumnInfo(name = "data_utworzenia")
     @SerializedName("data_utworzenia")
@@ -58,10 +59,10 @@ public class Notatka extends BaseObservable implements Serializable {
     private boolean zaznaczona;
 
     public Notatka() {
+        kategoriaId = 0;
         wyroznienie = false;
         dataUtworzenia = Calendar.getInstance().getTime();
         dataModyfikacji = Calendar.getInstance().getTime();
-        kategoria = "Brak";
         tekst = "";
         autor = "Anonimowy";
         tytul = "[BEZ TYTUŁU]";
@@ -94,10 +95,10 @@ public class Notatka extends BaseObservable implements Serializable {
     public void setTekst(String tekst) { this.tekst = tekst; }
 
     @Bindable
-    public String getKategoria() { return kategoria; }
+    public long getKategoriaId() { return kategoriaId; }
 
     @Bindable
-    public void setKategoria(String kategoria) { this.kategoria = kategoria; }
+    public void setKategoriaId(long kategoriaId) { this.kategoriaId = kategoriaId; }
 
     @Bindable
     public Date getDataUtworzenia() { return dataUtworzenia; }
@@ -135,7 +136,7 @@ public class Notatka extends BaseObservable implements Serializable {
         this.tytul = notatka.tytul;
         this.autor = notatka.autor;
         this.tekst = notatka.tekst;
-        this.kategoria = notatka.kategoria;
+        this.kategoriaId = notatka.kategoriaId;
         this.wyroznienie = notatka.wyroznienie;
         this.dataUtworzenia = notatka.dataUtworzenia;
         this.dataModyfikacji = Calendar.getInstance().getTime();

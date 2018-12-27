@@ -49,7 +49,7 @@ public class NotatnikActivity extends AppCompatActivity {
         czyZaladowane = false;
 
         notatkiViewModel = ViewModelProviders.of(this).get(NotatkiViewModel.class);
-        notatkiViewModel.getAllData().observe(this, new Observer<List<Notatka>>() {
+        notatkiViewModel.getNotatki().observe(this, new Observer<List<Notatka>>() {
             @Override
             public void onChanged(@Nullable final List<Notatka> zaladowaneNotatki) {
                 if (!czyZaladowane) {
@@ -70,6 +70,7 @@ public class NotatnikActivity extends AppCompatActivity {
 
         binding.setZaznaczoneNotatki(notatkiAdapter.getZaznaczoneNotatki().size());
         binding.setNotatkiAdapter(notatkiAdapter);
+        binding.setCzyPrzefiltrowane(czyPrzefiltrowane);
 
         //notatkiController = new NotatkiController(notatkiAdapter);
         //notatkiController.start();
@@ -118,6 +119,8 @@ public class NotatnikActivity extends AppCompatActivity {
             btSzukaj.setPressed(false);
             przefiltrowaneNotatki.clear();
             czyPrzefiltrowane = false;
+            binding.setCzyPrzefiltrowane(czyPrzefiltrowane);
+            binding.executePendingBindings();
         }
     }
 
@@ -125,10 +128,8 @@ public class NotatnikActivity extends AppCompatActivity {
         notatkiAdapter.wyroznij();
     }
 
-    public void tvNotatkaViewTytul_onClick(View view) {
+    public void notatkaView_onClick(View view) {
         LinearLayout notatkaContainer = (LinearLayout)view;
-        //int zaznaczonyIndeks = notatkiRecyclerView.getChildAdapterPosition(notatkaContainer);
-        //Notatka notatka = notatkiAdapter.getItem(zaznaczonyIndeks);
         NotatkiAdapter.NotatkiViewHolder vh = (NotatkiAdapter.NotatkiViewHolder)notatkiRecyclerView.getChildViewHolder(notatkaContainer);
         Notatka notatka = vh.binding.getNotatka();
 
@@ -172,6 +173,8 @@ public class NotatnikActivity extends AppCompatActivity {
                     notatkiAdapter.setData(przefiltrowaneNotatki);
                     notatkiAdapter.notifyDataSetChanged();
                     czyPrzefiltrowane = true;
+                    binding.setCzyPrzefiltrowane(czyPrzefiltrowane);
+                    binding.executePendingBindings();
                     String message = getResources().getQuantityString(R.plurals.znaleziono_msg, przefiltrowaneNotatki.size(), przefiltrowaneNotatki.size());
                     Toast toast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
                     toast.show();

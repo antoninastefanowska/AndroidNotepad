@@ -11,6 +11,9 @@
         <variable
             name="notatkiAdapter"
             type="com.tonia.notatnik.NotatkiAdapter" />
+        <variable
+            name="czyPrzefiltrowane"
+            type="boolean" />
     </data>
 
     <android.support.constraint.ConstraintLayout
@@ -44,7 +47,8 @@
                         android:layout_margin="@dimen/margin_small"
                         android:onClick="btDodaj_onClick"
                         android:tooltipText="@string/dodaj_btn"
-                        android:background="@drawable/button_plus" />
+                        android:background="@drawable/button_plus"
+                        android:enabled="@{!czyPrzefiltrowane}"/>
 
                     <Button
                         android:id="@+id/btUsun"

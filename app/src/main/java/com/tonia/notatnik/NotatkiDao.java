@@ -14,7 +14,7 @@ import java.util.List;
 @Dao
 public interface NotatkiDao {
     @Query("SELECT * FROM notatka")
-    LiveData<List<Notatka>> getAllData();
+    LiveData<List<Notatka>> getNotatki();
 
     @Query("SELECT COUNT(*) FROM notatka")
     int count();

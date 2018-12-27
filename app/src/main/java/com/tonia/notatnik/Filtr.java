@@ -22,7 +22,7 @@ public class Filtr extends BaseObservable implements Serializable {
     private String slowaKluczowe;
 
     private boolean kategoriaWarunek;
-    private String kategoria;
+    private Kategoria kategoria;
 
     private boolean dataUtworzeniaWarunek;
     private boolean dataUtworzeniaOdWarunek;
@@ -125,10 +125,10 @@ public class Filtr extends BaseObservable implements Serializable {
     }
 
     @Bindable
-    public String getKategoria() { return kategoria; }
+    public Kategoria getKategoria() { return kategoria; }
 
     @Bindable
-    public void setKategoria(String kategoria) { this.kategoria = kategoria; }
+    public void setKategoria(Kategoria kategoria) { this.kategoria = kategoria; }
 
     @Bindable
     public boolean getDataUtworzeniaWarunek() { return dataUtworzeniaWarunek; }
@@ -252,7 +252,7 @@ public class Filtr extends BaseObservable implements Serializable {
         }
 
         if (kategoriaWarunek)
-            if (kategoria != notatka.getKategoria()) return false;
+            if (kategoria.getId() != notatka.getKategoriaId()) return false;
 
         if (dataUtworzeniaWarunek) {
             if (dataUtworzeniaOdWarunek)

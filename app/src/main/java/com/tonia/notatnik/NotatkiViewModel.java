@@ -14,12 +14,10 @@ public class NotatkiViewModel extends AndroidViewModel {
     public NotatkiViewModel(@NonNull Application application) {
         super(application);
         notatkiRepository = new NotatkiRepository(application);
-        notatki = notatkiRepository.getAllData();
+        notatki = notatkiRepository.getNotatki();
     }
 
-    public LiveData<List<Notatka>> getAllData() {
-        return notatki;
-    }
+    public LiveData<List<Notatka>> getNotatki() { return notatki; }
 
     public int count() {
         return notatkiRepository.count();

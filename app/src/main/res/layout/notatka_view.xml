@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:background="@{notatka.getZaznaczona() ? @drawable/background_notatka_item_checked : @drawable/background_notatka_item}"
         android:orientation="horizontal"
-        android:onClick="tvNotatkaViewTytul_onClick"
+        android:onClick="notatkaView_onClick"
         android:layout_marginBottom="@dimen/margin_small" >
 
         <LinearLayout
@@ -26,13 +26,11 @@
             android:background="@drawable/background_notatka_border"
             android:orientation="horizontal" >
 
-            <CheckedTextView
+            <TextView
                 android:id="@+id/tvNotatkaViewTytul"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:checkMark="@drawable/background_notatka_item_checked"
                 android:textColor="@color/colorSecondary"
                 android:textSize="@dimen/text_size_big"
                 android:textStyle="bold"
