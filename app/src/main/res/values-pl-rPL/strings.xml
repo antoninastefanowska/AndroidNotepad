@@ -10,6 +10,9 @@
     <string name="odrzuc_btn">Odrzuć</string>
     <string name="zablokuj_btn">Zablokuj</string>
     <string name="odblokuj_btn">Usuń blokadę</string>
+    <string name="pogrubienie_btn">Pogrubienie</string>
+    <string name="kursywa_btn">Kursywa</string>
+    <string name="podkreslenie_btn">Podkreślenie</string>
     <string name="zatwierdz_btn">Zatwierdź</string>
     <string name="anuluj_btn">Anuluj</string>
 

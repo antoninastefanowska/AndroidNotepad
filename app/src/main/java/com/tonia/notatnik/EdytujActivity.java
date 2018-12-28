@@ -5,11 +5,18 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.graphics.Point;
+import android.graphics.Typeface;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.Html;
+import android.text.SpannableString;
+import android.text.SpannedString;
 import android.text.TextWatcher;
+import android.text.style.StyleSpan;
+import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -108,6 +115,7 @@ public class EdytujActivity extends AppCompatActivity {
 
     public void btZapisz_onClick(View view) {
         Intent powrot = new Intent();
+        notatka.setTekst(Html.toHtml(poleTekst.getText(), 0));
         powrot.putExtra("notatka", notatka);
         setResult(RESULT_OK, powrot);
         finish();
@@ -132,6 +140,62 @@ public class EdytujActivity extends AppCompatActivity {
     public void btOdblokuj_onClick(View view) {
         Intent blokada = new Intent(EdytujActivity.this, BlokadaActivity.class);
         startActivityForResult(blokada, USUN_BLOKADE);
+    }
+
+    public void btPogrubienie_onClick(View view) {
+        SpannableString tekst = new SpannableString(poleTekst.getText());
+        int nastepny, pogrubione = 0;
+        for (int i = poleTekst.getSelectionStart(); i < poleTekst.getSelectionEnd(); i = nastepny) {
+            nastepny = tekst.nextSpanTransition(i, poleTekst.getSelectionEnd(), StyleSpan.class);
+            StyleSpan[] styleSpans = tekst.getSpans(i, nastepny, StyleSpan.class);
+            for (StyleSpan styleSpan : styleSpans) {
+                if (styleSpan.getStyle() == Typeface.BOLD) {
+                    pogrubione++;
+                    tekst.removeSpan(styleSpan);
+                }
+            }
+        }
+
+        if (pogrubione == 0) {
+            tekst.setSpan(new StyleSpan(Typeface.BOLD), poleTekst.getSelectionStart(), poleTekst.getSelectionEnd(), 0);
+        }
+        poleTekst.setText(tekst);
+    }
+
+    public void btKursywa_onClick(View view) {
+        SpannableString tekst = new SpannableString(poleTekst.getText());
+        int nastepny, pochylone = 0;
+        for (int i = poleTekst.getSelectionStart(); i < poleTekst.getSelectionEnd(); i = nastepny) {
+            nastepny = tekst.nextSpanTransition(i, poleTekst.getSelectionEnd(), StyleSpan.class);
+            StyleSpan[] styleSpans = tekst.getSpans(i, nastepny, StyleSpan.class);
+            for (StyleSpan styleSpan : styleSpans) {
+                if (styleSpan.getStyle() == Typeface.ITALIC) {
+                    pochylone++;
+                    tekst.removeSpan(styleSpan);
+                }
+            }
+        }
+        if (pochylone == 0) {
+            tekst.setSpan(new StyleSpan(Typeface.ITALIC), poleTekst.getSelectionStart(), poleTekst.getSelectionEnd(), 0);
+        }
+        poleTekst.setText(tekst);
+    }
+
+    public void btPodkreslenie_onClick(View view) {
+        SpannableString tekst = new SpannableString(poleTekst.getText());
+        int nastepny, podkreslone = 0;
+        for (int i = poleTekst.getSelectionStart(); i < poleTekst.getSelectionEnd(); i = nastepny) {
+            nastepny = tekst.nextSpanTransition(i, poleTekst.getSelectionEnd(), StyleSpan.class);
+            UnderlineSpan[] underlineSpans = tekst.getSpans(i, nastepny, UnderlineSpan.class);
+            for (UnderlineSpan underlineSpan : underlineSpans) {
+                podkreslone++;
+                tekst.removeSpan(underlineSpan);
+            }
+        }
+        if (podkreslone == 0) {
+            tekst.setSpan(new UnderlineSpan(), poleTekst.getSelectionStart(), poleTekst.getSelectionEnd(), 0);
+        }
+        poleTekst.setText(tekst);
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

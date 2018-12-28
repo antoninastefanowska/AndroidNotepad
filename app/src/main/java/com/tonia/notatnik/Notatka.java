@@ -7,6 +7,8 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 import android.arch.persistence.room.Ignore;
+import android.text.Html;
+import android.text.SpannableString;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -154,5 +156,16 @@ public class Notatka extends BaseObservable implements Serializable {
     @Override
     public String toString() {
         return tytul;
+    }
+
+    public String skroconyTekst() {
+        if (zablokowana) return "[TREŚĆ ZABLOKOWANA]";
+
+        SpannableString tekst = new SpannableString(Html.fromHtml(this.tekst, 0));
+        String s = tekst.toString().replace("\n", " ");
+        if (tekst.toString().length() >= 50)
+            return s.substring(0, 50) + "...";
+        else
+            return s;
     }
 }

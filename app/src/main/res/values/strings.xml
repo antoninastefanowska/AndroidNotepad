@@ -11,6 +11,9 @@
     <string name="odrzuc_btn">Discard</string>
     <string name="zablokuj_btn">Lock</string>
     <string name="odblokuj_btn">Remove lock</string>
+    <string name="pogrubienie_btn">Bold</string>
+    <string name="kursywa_btn">Italic</string>
+    <string name="podkreslenie_btn">Underline</string>
     <string name="zatwierdz_btn">OK</string>
     <string name="anuluj_btn">Cancel</string>
 

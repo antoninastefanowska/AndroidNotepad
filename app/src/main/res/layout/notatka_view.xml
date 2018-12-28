@@ -24,7 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/background_notatka_border"
-            android:orientation="horizontal" >
+            android:orientation="vertical" >
 
             <TextView
                 android:id="@+id/tvNotatkaViewTytul"
@@ -35,6 +35,25 @@
                 android:textSize="@dimen/text_size_big"
                 android:textStyle="bold"
                 android:text="@{notatka.getTytul()}" />
+
+            <TextView
+                android:id="@+id/tvNotatkaViewAutor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/colorSecondary"
+                android:textSize="@dimen/text_size_big"
+                android:textStyle="italic"
+                android:text="@{notatka.getAutor()}" />
+
+            <TextView
+                android:id="@+id/tvNotatkaViewTekst"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorSecondary"
+                android:textSize="@dimen/text_size_medium"
+                android:visibility="@{notatka.getZaznaczona() ? View.VISIBLE : View.GONE}"
+                android:text="@{notatka.skroconyTekst()}" />
 
             <ImageView
                 android:id="@+id/ivNotatkaViewIcon"

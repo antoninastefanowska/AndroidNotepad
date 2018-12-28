@@ -5,6 +5,8 @@
     tools:context=".EdytujActivity">
 
     <data>
+        <import
+            type="android.text.Html" />
         <variable
             name="notatka"
             type="com.tonia.notatnik.Notatka" />
@@ -29,7 +31,6 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
                     android:orientation="horizontal">
 
                     <Button
@@ -53,21 +54,51 @@
                         android:enabled="false" />
 
                     <Button
+                        android:id="@+id/btPogrubienie"
+                        android:layout_width="@dimen/icon_size"
+                        android:layout_height="@dimen/icon_size"
+                        android:layout_margin="@dimen/margin_small"
+                        android:onClick="btPogrubienie_onClick"
+                        android:tooltipText="@string/pogrubienie_btn"
+                        android:background="@drawable/button_bold" />
+
+                    <Button
+                        android:id="@+id/btKursywa"
+                        android:layout_width="@dimen/icon_size"
+                        android:layout_height="@dimen/icon_size"
+                        android:layout_margin="@dimen/margin_small"
+                        android:onClick="btKursywa_onClick"
+                        android:tooltipText="@string/kursywa_btn"
+                        android:background="@drawable/button_italic" />
+
+                    <Button
+                        android:id="@+id/btPodkreslenie"
+                        android:layout_width="@dimen/icon_size"
+                        android:layout_height="@dimen/icon_size"
+                        android:layout_margin="@dimen/margin_small"
+                        android:onClick="btPodkreslenie_onClick"
+                        android:tooltipText="@string/podkreslenie_btn"
+                        android:background="@drawable/button_underline" />
+
+                    <Button
                         android:id="@+id/btZablokuj"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/icon_size"
+                        android:layout_height="@dimen/icon_size"
+                        android:layout_margin="@dimen/margin_small"
                         android:enabled="@{!notatka.getZablokowana()}"
                         android:onClick="btZablokuj_onClick"
-                        android:text="@string/zablokuj_btn" />
+                        android:tooltipText="@string/zablokuj_btn"
+                        android:background="@drawable/button_locked" />
 
                     <Button
                         android:id="@+id/btOdblokuj"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/icon_size"
+                        android:layout_height="@dimen/icon_size"
+                        android:layout_margin="@dimen/margin_small"
                         android:enabled="@{notatka.getZablokowana()}"
                         android:onClick="btOdblokuj_onClick"
-                        android:text="@string/odblokuj_btn" />
-
+                        android:tooltipText="@string/odblokuj_btn"
+                        android:background="@drawable/button_unlocked" />
                 </LinearLayout>
 
             </HorizontalScrollView>
@@ -148,7 +179,7 @@
                 android:layout_margin="@dimen/margin_big"
                 android:background="@drawable/layout_bg"
                 android:gravity="top"
-                android:text="@={notatka.tekst}" />
+                android:text="@{Html.fromHtml(notatka.getTekst(), 0)}" />
 
         </LinearLayout>
     </android.support.constraint.ConstraintLayout>
