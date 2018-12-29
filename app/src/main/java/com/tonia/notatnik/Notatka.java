@@ -42,9 +42,6 @@ public class Notatka extends BaseObservable implements Serializable {
     @ColumnInfo(name = "wyroznienie")
     private boolean wyroznienie;
 
-    @Ignore
-    private String ikonka;
-
     @ColumnInfo(name = "zablokowana")
     private boolean zablokowana;
 
@@ -113,10 +110,6 @@ public class Notatka extends BaseObservable implements Serializable {
         notifyPropertyChanged(BR.notatka);
     }
 
-    public String getIkonka() { return ikonka; }
-
-    public void setIkonka(String ikonka) { this.ikonka = ikonka; }
-
     public boolean getZablokowana() { return zablokowana; }
 
     public void setZablokowana(boolean zablokowana)
@@ -151,9 +144,9 @@ public class Notatka extends BaseObservable implements Serializable {
 
     public String skroconyTekst() {
         SpannableString tekst = new SpannableString(Html.fromHtml(this.tekst, 0));
-        String s = tekst.toString().replace("\n", " ");
-        if (tekst.toString().length() >= 80)
-            return s.substring(0, 80) + "...";
+        String s = tekst.toString();
+        if (s.length() >= 80)
+            return s.substring(0, 80).replace("\n", " ") + "...";
         else
             return s;
     }
