@@ -3,24 +3,23 @@ package com.tonia.notatnik;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.graphics.Point;
+import android.databinding.Observable;
 import android.graphics.Typeface;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.Html;
 import android.text.SpannableString;
-import android.text.SpannedString;
 import android.text.TextWatcher;
 import android.text.style.StyleSpan;
 import android.text.style.UnderlineSpan;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -34,12 +33,14 @@ public class EdytujActivity extends AppCompatActivity {
     private final static int ZABLOKUJ = 0, ODBLOKUJ = 1, USUN_BLOKADE = 2;
     private Notatka notatka;
     private Button przyciskZapisz, przyciskOdrzuc;
-    private EditText poleTytul, poleAutor, poleTekst;
+    private EditText poleTekst;
     private Spinner poleKategoria;
     private ActivityEdytujBinding binding;
     private KategorieViewModel kategorieViewModel;
     private List<Kategoria> kategorie;
     private KategorieAdapter kategorieAdapter;
+    private AlertDialog ostrzezenie;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,8 +75,6 @@ public class EdytujActivity extends AppCompatActivity {
 
         przyciskZapisz = (Button)findViewById(R.id.btZapisz);
         przyciskOdrzuc = (Button)findViewById(R.id.btAnuluj);
-        poleTytul = (EditText)findViewById(R.id.etTytul);
-        poleAutor = (EditText)findViewById(R.id.etAutor);
         poleTekst = (EditText)findViewById(R.id.etTekst);
 
         TextWatcher textWatcher = new TextWatcher() {
@@ -86,7 +85,7 @@ public class EdytujActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                zmiana();
+                notatka.setTekst(Html.toHtml(poleTekst.getText(), 0));
             }
 
             @Override
@@ -94,9 +93,6 @@ public class EdytujActivity extends AppCompatActivity {
 
             }
         };
-
-        poleTytul.addTextChangedListener(textWatcher);
-        poleAutor.addTextChangedListener(textWatcher);
         poleTekst.addTextChangedListener(textWatcher);
 
         poleKategoria.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -111,25 +107,42 @@ public class EdytujActivity extends AppCompatActivity {
 
             }
         });
+
+        AlertDialog.Builder alertDialogBuilder;
+        alertDialogBuilder = new AlertDialog.Builder(EdytujActivity.this);
+        alertDialogBuilder.setTitle(getResources().getString(R.string.odrzuc_btn));
+        alertDialogBuilder.setMessage(getResources().getString(R.string.czy_odrzucic_alert));
+        alertDialogBuilder.setPositiveButton(getResources().getString(R.string.tak), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent powrot = new Intent();
+                setResult(RESULT_CANCELED, powrot);
+                finish();
+            }
+        });
+        alertDialogBuilder.setNegativeButton(getResources().getString(R.string.nie), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        ostrzezenie = alertDialogBuilder.create();
+    }
+
+    @Override
+    public void onBackPressed() {
+        ostrzezenie.show();
     }
 
     public void btZapisz_onClick(View view) {
         Intent powrot = new Intent();
-        notatka.setTekst(Html.toHtml(poleTekst.getText(), 0));
         powrot.putExtra("notatka", notatka);
         setResult(RESULT_OK, powrot);
         finish();
     }
 
     public void btOdrzuc_onClick(View view) {
-        Intent powrot = new Intent();
-        setResult(RESULT_CANCELED, powrot);
-        finish();
-    }
-
-    private void zmiana() {
-        przyciskZapisz.setEnabled(true);
-        przyciskOdrzuc.setEnabled(true);
+        ostrzezenie.show();
     }
 
     public void btZablokuj_onClick(View view) {

@@ -19,8 +19,8 @@ public class KategorieRepository {
 
     public LiveData<List<Kategoria>> getKategorie() { return kategorie; }
 
-    public Kategoria getKategoria(long id) {
-        Kategoria kategoria = null;
+    public LiveData<Kategoria> getKategoria(long id) {
+        LiveData<Kategoria> kategoria = null;
         try {
             kategoria = new GetKategoriaAsyncTask(kategorieDao).execute(id).get();
         }
@@ -30,13 +30,13 @@ public class KategorieRepository {
         return kategoria;
     }
 
-    private static class GetKategoriaAsyncTask extends AsyncTask<Long, Void, Kategoria> {
+    private static class GetKategoriaAsyncTask extends AsyncTask<Long, Void, LiveData<Kategoria>> {
         private KategorieDao kategorieDao;
 
         public GetKategoriaAsyncTask(KategorieDao kategorieDao) { this.kategorieDao = kategorieDao; }
 
         @Override
-        protected Kategoria doInBackground(final Long... params) {
+        protected LiveData<Kategoria> doInBackground(final Long... params) {
             return kategorieDao.getKategoria(params[0]);
         }
     }

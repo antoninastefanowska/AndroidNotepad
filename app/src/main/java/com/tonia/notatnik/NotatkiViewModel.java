@@ -23,6 +23,8 @@ public class NotatkiViewModel extends AndroidViewModel {
         return notatkiRepository.count();
     }
 
+    public LiveData<List<Notatka>> search(String query) { return notatkiRepository.search(query); }
+
     public long insert(Notatka notatka) {
         return notatkiRepository.insert(notatka);
     }

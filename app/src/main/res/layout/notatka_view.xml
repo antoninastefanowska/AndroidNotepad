@@ -4,8 +4,6 @@
     <data>
         <import
             type="android.view.View" />
-        <import
-            type="android.view.ViewGroup.LayoutParams" />
         <variable
             name="notatka"
             type="com.tonia.notatnik.Notatka" />
@@ -15,53 +13,63 @@
         android:id="@+id/llNotatkaViewContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@{notatka.getZaznaczona() ? @drawable/background_notatka_item_checked : @drawable/background_notatka_item}"
+        android:background="@{notatka.getWyroznienie() ? (notatka.getZaznaczona() ? @drawable/background_notatka_item_favorite_checked : @drawable/background_notatka_item_favorite) : (notatka.getZaznaczona() ? @drawable/background_notatka_item_checked : @drawable/background_notatka_item)}"
         android:orientation="horizontal"
         android:onClick="notatkaView_onClick"
         android:layout_marginBottom="@dimen/margin_small" >
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/background_notatka_border"
-            android:orientation="vertical" >
+            android:background="@{notatka.getWyroznienie() ? @drawable/background_notatka_border_favorite : @drawable/background_notatka_border}"
+            android:gravity="center_vertical" >
 
-            <TextView
-                android:id="@+id/tvNotatkaViewTytul"
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:textColor="@color/colorSecondary"
-                android:textSize="@dimen/text_size_big"
-                android:textStyle="bold"
-                android:text="@{notatka.getTytul()}" />
+                android:orientation="vertical"
+                android:layout_alignParentLeft="true"
+                android:layout_columnWeight="2" >
 
-            <TextView
-                android:id="@+id/tvNotatkaViewAutor"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:textColor="@color/colorSecondary"
-                android:textSize="@dimen/text_size_big"
-                android:textStyle="italic"
-                android:text="@{notatka.getAutor()}" />
+                <TextView
+                    android:id="@+id/tvNotatkaViewTytul"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@{notatka.getWyroznienie() ? @color/colorPrimary : @color/colorSecondary}"
+                    android:textSize="@dimen/text_size_big"
+                    android:textStyle="bold"
+                    android:text="@{notatka.getTytul()}" />
 
-            <TextView
-                android:id="@+id/tvNotatkaViewTekst"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/colorSecondary"
-                android:textSize="@dimen/text_size_medium"
-                android:visibility="@{notatka.getZaznaczona() ? View.VISIBLE : View.GONE}"
-                android:text="@{notatka.skroconyTekst()}" />
+                <TextView
+                    android:id="@+id/tvNotatkaViewAutor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@{notatka.getWyroznienie() ? @color/colorPrimary : @color/colorSecondary}"
+                    android:textSize="@dimen/text_size_big"
+                    android:textStyle="italic"
+                    android:text="@{notatka.getAutor()}" />
+
+                <TextView
+                    android:id="@+id/tvNotatkaViewTekst"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@{notatka.getWyroznienie() ? @color/colorPrimary : @color/colorSecondary}"
+                    android:textSize="@dimen/text_size_medium"
+                    android:visibility="@{notatka.getZaznaczona() ? View.VISIBLE : View.GONE}"
+                    android:text="@{notatka.getZablokowana() ? @string/tresc_zablokowana : notatka.skroconyTekst()}" />
+
+            </LinearLayout>
 
             <ImageView
                 android:id="@+id/ivNotatkaViewIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="right" />
+                android:layout_width="@dimen/icon_size_small"
+                android:layout_height="@dimen/icon_size_small"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:visibility="@{notatka.getZablokowana() ? View.VISIBLE : View.GONE}"
+                android:src="@{notatka.getWyroznienie() ? @drawable/icon_locked_enabled : @drawable/icon_locked_mark}" />
 
-        </LinearLayout>
+        </RelativeLayout>
 
     </LinearLayout>
 </layout>

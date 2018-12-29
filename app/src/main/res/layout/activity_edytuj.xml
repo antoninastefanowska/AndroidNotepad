@@ -26,7 +26,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorSecondary"
-                android:padding="@dimen/padding_small">
+                android:padding="@dimen/padding_small"
+                android:scrollbars="none">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -40,8 +41,7 @@
                         android:layout_margin="@dimen/margin_small"
                         android:onClick="btZapisz_onClick"
                         android:tooltipText="@string/zapisz_btn"
-                        android:background="@drawable/button_floppydisc"
-                        android:enabled="false" />
+                        android:background="@drawable/button_floppydisc" />
 
                     <Button
                         android:id="@+id/btAnuluj"
@@ -50,8 +50,7 @@
                         android:layout_margin="@dimen/margin_small"
                         android:onClick="btOdrzuc_onClick"
                         android:tooltipText="@string/odrzuc_btn"
-                        android:background="@drawable/button_cross"
-                        android:enabled="false" />
+                        android:background="@drawable/button_cross" />
 
                     <Button
                         android:id="@+id/btPogrubienie"
@@ -109,7 +108,7 @@
                 android:layout_marginLeft="@dimen/margin_big"
                 android:layout_marginTop="@dimen/margin_big"
                 android:layout_marginRight="@dimen/margin_big"
-                android:background="@drawable/layout_bg"
+                android:background="@drawable/background_layout"
                 android:measureWithLargestChild="true"
                 android:stretchColumns="0,1">
 
@@ -122,6 +121,7 @@
                         android:id="@+id/tvTytul"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/colorPrimary"
                         android:text="@string/tytul" />
 
                     <EditText
@@ -142,6 +142,7 @@
                         android:id="@+id/tvAutor"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/colorPrimary"
                         android:text="@string/autor" />
 
                     <EditText
@@ -163,6 +164,7 @@
                         android:id="@+id/tvKategoria"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/colorPrimary"
                         android:text="@string/kategoria" />
 
                     <Spinner
@@ -177,9 +179,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/margin_big"
-                android:background="@drawable/layout_bg"
+                android:background="@drawable/background_layout"
                 android:gravity="top"
-                android:text="@{Html.fromHtml(notatka.getTekst(), 0)}" />
+                android:text="@{Html.fromHtml(notatka.tekst)}" />
 
         </LinearLayout>
     </android.support.constraint.ConstraintLayout>

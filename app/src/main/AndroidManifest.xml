@@ -21,7 +21,8 @@
         </activity>
         <activity android:name=".EdytujActivity" />
         <activity android:name=".SzukajActivity" />
-        <activity android:name=".BlokadaActivity"></activity>
+        <activity android:name=".BlokadaActivity" />
+        <activity android:name=".SzczegolyActivity"></activity>
     </application>
 
 </manifest>

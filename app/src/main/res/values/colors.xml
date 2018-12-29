@@ -4,4 +4,6 @@
     <color name="colorSecondary">#FFDBDEE3</color>
     <color name="colorAccent">#D81B60</color>
     <color name="colorChecked">#FF4D5A7F</color>
+    <color name="colorFavorite">#FFFFDD55</color>
+    <color name="colorFavoriteChecked">#FFFFB300</color>
 </resources>

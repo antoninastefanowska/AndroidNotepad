@@ -32,17 +32,17 @@ public class Blokada extends FingerprintManager.AuthenticationCallback {
 
     @Override
     public void onAuthenticationError(int errMsgId, CharSequence errString) {
-        Toast.makeText(context, R.string.brak_autentykacji_msg, Toast.LENGTH_LONG).show();
+        Toast.makeText(context, R.string.brak_autentykacji_msg, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onAuthenticationFailed() {
-        Toast.makeText(context, R.string.brak_autentykacji_msg, Toast.LENGTH_LONG).show();
+        Toast.makeText(context, R.string.brak_autentykacji_msg, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onAuthenticationSucceeded(FingerprintManager.AuthenticationResult result) {
-        Toast.makeText(context, R.string.autentykacja_pomyslna_msg, Toast.LENGTH_LONG).show();
+        Toast.makeText(context, R.string.autentykacja_pomyslna_msg, Toast.LENGTH_SHORT).show();
         Intent powrot = new Intent();
         AppCompatActivity blokadaActivity = (AppCompatActivity)context;
         blokadaActivity.setResult(RESULT_OK, powrot);

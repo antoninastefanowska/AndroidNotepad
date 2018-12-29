@@ -6,6 +6,7 @@
     <string name="edytuj_btn">Edit</string>
     <string name="usun_btn">Delete</string>
     <string name="wyroznij_btn">Favorite</string>
+    <string name="szczegoly_btn">Details</string>
     <string name="szukaj_btn">Find</string>
     <string name="zapisz_btn">Save</string>
     <string name="odrzuc_btn">Discard</string>
@@ -43,6 +44,11 @@
         <item quantity="one">Found %d note.</item>
         <item quantity="other">Found %d notes.</item>
     </plurals>
+    <plurals name="czy_usunac_alert">
+        <item quantity="one">Do you really want to delete selected note?</item>
+        <item quantity="other">Do you really want to delete %d selected notes?</item>
+    </plurals>
+    <string name="czy_odrzucic_alert">Do you really want to discard changes?</string>
     <string name="brak_zabezpieczen_msg">Lock screen security not enabled in Settings</string>
     <string name="brak_czytnika_msg">Fingerprint authentication permission not enabled</string>
     <string name="brak_instancji_msg">Failed to get KeyGenerator instance</string>
@@ -50,4 +56,5 @@
     <string name="brak_autentykacji_msg">Authentication failed</string>
     <string name="autentykacja_pomyslna_msg">Authentication succeed</string>
     <string name="dotknij_czujnika">Touch sensor</string>
+    <string name="tresc_zablokowana">[CONTENT HIDDEN]</string>
 </resources>

@@ -2,6 +2,7 @@ package com.tonia.notatnik;
 
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
+import android.arch.persistence.db.SimpleSQLiteQuery;
 import android.os.AsyncTask;
 
 import java.util.List;
@@ -31,20 +32,18 @@ public class NotatkiRepository {
         return result;
     }
 
-    private static class CountAsyncTask extends AsyncTask<Void, Void, Integer> {
-        private NotatkiDao notatkiDao;
-
-        public CountAsyncTask(NotatkiDao dao) {
-            notatkiDao = dao;
+    public LiveData<List<Notatka>> search(String query) {
+        LiveData<List<Notatka>> result = null;
+        try {
+            result = new SearchAsyncTask(notatkiDao).execute(query).get();
         }
-
-        @Override
-        protected Integer doInBackground(final Void... params) {
-            return notatkiDao.count();
+        catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
         }
+        return result;
     }
 
-    Long insert(Notatka notatka) {
+    public Long insert(Notatka notatka) {
         Long id = null;
         try {
             id = new InsertAsyncTask(notatkiDao).execute(notatka).get();
@@ -58,6 +57,30 @@ public class NotatkiRepository {
     public void delete(Notatka notatka) { new DeleteAsyncTask(notatkiDao).execute(notatka); }
 
     public void update(Notatka notatka) { new UpdateAsyncTask(notatkiDao).execute(notatka); }
+
+    private static class CountAsyncTask extends AsyncTask<Void, Void, Integer> {
+        private NotatkiDao notatkiDao;
+
+        public CountAsyncTask(NotatkiDao dao) {
+            notatkiDao = dao;
+        }
+
+        @Override
+        protected Integer doInBackground(final Void... params) {
+            return notatkiDao.count();
+        }
+    }
+
+    private static class SearchAsyncTask extends AsyncTask<String, Void, LiveData<List<Notatka>>> {
+        private NotatkiDao notatkiDao;
+
+        public SearchAsyncTask(NotatkiDao dao) { notatkiDao = dao; }
+
+        @Override
+        protected LiveData<List<Notatka>> doInBackground(String... params) {
+            return notatkiDao.search(new SimpleSQLiteQuery(params[0]));
+        }
+    }
 
     private static class InsertAsyncTask extends AsyncTask<Notatka, Void, Long> {
         private NotatkiDao notatkiDao;

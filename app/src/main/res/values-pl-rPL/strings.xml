@@ -5,6 +5,7 @@
     <string name="edytuj_btn">Edytuj</string>
     <string name="usun_btn">Usuń</string>
     <string name="wyroznij_btn">Wyróżnij</string>
+    <string name="szczegoly_btn">Szczegóły</string>
     <string name="szukaj_btn">Szukaj</string>
     <string name="zapisz_btn">Zapisz</string>
     <string name="odrzuc_btn">Odrzuć</string>
@@ -45,6 +46,12 @@
         <item quantity="few">Znaleziono %d notatki.</item>
         <item quantity="many">Znaleziono %d notatek.</item>
     </plurals>
+    <plurals name="czy_usunac_alert">
+        <item quantity="one">Czy na pewno chcesz usunąć zaznaczoną notatkę?</item>
+        <item quantity="few">Czy na pewno chcesz usunąć %d zaznaczone notatki?</item>
+        <item quantity="many">Czy na pewno chcesz usunąć %d zaznaczonych notatek?</item>
+    </plurals>
+    <string name="czy_odrzucic_alert">Czy na pewno chcesz odrzucić zmiany?</string>
     <string name="brak_zabezpieczen_msg">Blokowanie ekranu nie jest włączone w Ustawieniach</string>
     <string name="brak_czytnika_msg">Brak zezwolenia na autentykację odciskiem palca</string>
     <string name="brak_instancji_msg">Nie udało się pobrać instancji KeyGenerator</string>
@@ -52,4 +59,5 @@
     <string name="brak_autentykacji_msg">Błąd autentykacji</string>
     <string name="autentykacja_pomyslna_msg">Autentykacja pomyślna</string>
     <string name="dotknij_czujnika">Dotknij czujnika</string>
+    <string name="tresc_zablokowana">[TREŚĆ UKRYTA]</string>
 </resources>

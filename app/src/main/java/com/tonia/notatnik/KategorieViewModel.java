@@ -19,5 +19,5 @@ public class KategorieViewModel extends AndroidViewModel {
 
     public LiveData<List<Kategoria>> getKategorie() { return kategorie; }
 
-    public Kategoria getKategoria(long id) { return kategorieRepository.getKategoria(id); }
+    public LiveData<Kategoria> getKategoria(long id) { return kategorieRepository.getKategoria(id); }
 }

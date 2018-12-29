@@ -2,10 +2,13 @@ package com.tonia.notatnik;
 
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
+import android.util.Log;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class Filtr extends BaseObservable implements Serializable {
     private boolean tytulWarunek;
@@ -223,56 +226,112 @@ public class Filtr extends BaseObservable implements Serializable {
     @Bindable
     public void setWyroznienie(boolean wyroznienie) { this.wyroznienie = wyroznienie; }
 
-    public boolean czyPasuje(Notatka notatka) {
+    public String buildQuery() {
+        StringBuilder conditionBuilder = new StringBuilder(), queryBuilder = new StringBuilder("SELECT * FROM notatka");
+        List<String> conditions = new ArrayList<String>();
         if (tytulWarunek) {
             if (tytulDokladny) {
-                if (!tytul.equals(notatka.getTytul())) return false;
+                conditionBuilder.append("tytul = \'");
+                conditionBuilder.append(tytul);
+                conditionBuilder.append("\'");
             }
             else if (tytulZawiera) {
-                if (!notatka.getTytul().toLowerCase().contains(tytul.toLowerCase())) return false;
+                conditionBuilder.append("LOWER(tytul) LIKE \'%");
+                conditionBuilder.append(tytul.toLowerCase());
+                conditionBuilder.append("%\'");
             }
+            conditions.add(conditionBuilder.toString());
+            conditionBuilder.setLength(0);
         }
-
-        if (autorWarunek)
-            if (autor != notatka.getAutor()) return false;
+        if (autorWarunek) {
+            conditionBuilder.append("autor = \'");
+            conditionBuilder.append(autor);
+            conditionBuilder.append("\'");
+            conditions.add(conditionBuilder.toString());
+            conditionBuilder.setLength(0);
+        }
 
         if (slowaKluczoweWarunek) {
-            String[] slowa = slowaKluczowe.split(" ");
-            String tekst = notatka.getTekst().toLowerCase();
-            if (slowaKluczoweWszystkie) {
-                for (String slowo : slowa)
-                    if (!tekst.contains(slowo)) return false;
+            String separator;
+            if (slowaKluczoweJakiekolwiek)
+                separator = " OR ";
+            else
+                separator = " AND ";
+
+            String[] slowa = slowaKluczowe.toLowerCase().split(" ");
+            conditionBuilder.append("(");
+            if (slowa.length > 0) {
+                conditionBuilder.append("LOWER(tekst) LIKE \'%");
+                conditionBuilder.append(slowa[0]);
+                conditionBuilder.append("%\'");
             }
-            else if (slowaKluczoweJakiekolwiek) {
-                int i;
-                for (i = 0; i < slowa.length; i++)
-                    if (tekst.contains(slowa[i])) break;
-                if (i == slowa.length) return false;
+            for (int i = 1; i < slowa.length; i++) {
+                conditionBuilder.append(separator);
+                conditionBuilder.append("LOWER(tekst) LIKE \'%");
+                conditionBuilder.append(slowa[i]);
+                conditionBuilder.append("%\'");
             }
+            conditionBuilder.append(")");
+            conditions.add(conditionBuilder.toString());
+            conditionBuilder.setLength(0);
         }
 
-        if (kategoriaWarunek)
-            if (kategoria.getId() != notatka.getKategoriaId()) return false;
+        if (kategoriaWarunek) {
+            conditionBuilder.append("kategoria_id = ");
+            conditionBuilder.append(kategoria.getId());
+            conditions.add(conditionBuilder.toString());
+            conditionBuilder.setLength(0);
+        }
 
         if (dataUtworzeniaWarunek) {
-            if (dataUtworzeniaOdWarunek)
-                if (dataUtworzeniaOd.after(notatka.getDataUtworzenia())) return false;
-
-            if (dataUtworzeniaDoWarunek)
-                if (dataUtworzeniaDo.before(notatka.getDataUtworzenia())) return false;
+            if (dataUtworzeniaOdWarunek) {
+                conditionBuilder.append("data_utworzenia >= ");
+                conditionBuilder.append(DateConverters.toTimestamp(dataUtworzeniaOd));
+                conditions.add(conditionBuilder.toString());
+                conditionBuilder.setLength(0);
+            }
+            if (dataUtworzeniaDoWarunek) {
+                conditionBuilder.append("data_utworzenia <= ");
+                conditionBuilder.append(DateConverters.toTimestamp(dataUtworzeniaDo));
+                conditions.add(conditionBuilder.toString());
+                conditionBuilder.setLength(0);
+            }
         }
 
         if (dataModyfikacjiWarunek) {
-            if (dataModyfikacjiOdWarunek)
-                if (dataModyfikacjiOd.after(notatka.getDataModyfikacji())) return false;
-
-            if (dataModyfikacjiDoWarunek)
-                if (dataModyfikacjiDo.before(notatka.getDataModyfikacji())) return false;
+            if (dataModyfikacjiOdWarunek) {
+                conditionBuilder.append("data_modyfikacji >= ");
+                conditionBuilder.append(DateConverters.toTimestamp(dataModyfikacjiOd));
+                conditions.add(conditionBuilder.toString());
+                conditionBuilder.setLength(0);
+            }
+            if (dataModyfikacjiDoWarunek) {
+                conditionBuilder.append("data_modyfikacji <= ");
+                conditionBuilder.append(DateConverters.toTimestamp(dataModyfikacjiDo));
+                conditions.add(conditionBuilder.toString());
+                conditionBuilder.setLength(0);
+            }
         }
 
-        if (wyroznienieWarunek)
-            if (wyroznienie != notatka.getWyroznienie()) return false;
+        if (wyroznienieWarunek) {
+            conditionBuilder.append("wyroznienie = ");
+            conditionBuilder.append(wyroznienie ? 1 : 0);
+            conditions.add(conditionBuilder.toString());
+            conditionBuilder.setLength(0);
+        }
 
-        return true;
+        if (conditions.size() > 0) {
+            queryBuilder.append(" WHERE ");
+            queryBuilder.append(conditions.get(0));
+        }
+
+        for (int i = 1; i < conditions.size(); i++) {
+            queryBuilder.append(" AND ");
+            queryBuilder.append(conditions.get(i));
+        }
+
+        Log.d("zapytanie", queryBuilder.toString());
+
+        return queryBuilder.toString();
     }
 }

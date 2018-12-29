@@ -18,6 +18,7 @@ public class NotatkiAdapter extends RecyclerView.Adapter<NotatkiAdapter.NotatkiV
     private static final String BASE_IMAGE_URL = "https://raw.githubusercontent.com/toniaa/BazaNotatek/master/public/images/";
     private List<Notatka> notatki;
     private List<Notatka> zaznaczoneNotatki;
+    private NotatkiViewModel notatkiViewModel;
     private Context context;
 
     public static class NotatkiViewHolder extends RecyclerView.ViewHolder {
@@ -31,9 +32,10 @@ public class NotatkiAdapter extends RecyclerView.Adapter<NotatkiAdapter.NotatkiV
         }
     }
 
-    public NotatkiAdapter(Context context, List<Notatka> notatki) {
+    public NotatkiAdapter(Context context, List<Notatka> notatki, NotatkiViewModel notatkiViewModel) {
         this.notatki = notatki;
         this.context = context;
+        this.notatkiViewModel = notatkiViewModel;
         zaznaczoneNotatki = new LinkedList<Notatka>();
     }
 
@@ -66,6 +68,7 @@ public class NotatkiAdapter extends RecyclerView.Adapter<NotatkiAdapter.NotatkiV
 
     public void setData(List<Notatka> notatki) {
         this.notatki = notatki;
+        notifyDataSetChanged();
     }
 
     public Notatka getItem(int position) {
@@ -79,17 +82,21 @@ public class NotatkiAdapter extends RecyclerView.Adapter<NotatkiAdapter.NotatkiV
     public void removeItem(Notatka item) {
         int position = notatki.indexOf(item);
         notatki.remove(position);
+        notatkiViewModel.delete(item);
         notifyItemRemoved(position);
     }
 
     public void editItem(Notatka oldItem, Notatka newItem) {
         int position = notatki.indexOf(oldItem);
         oldItem.przepisz(newItem);
+        notatkiViewModel.update(oldItem);
         notifyItemChanged(position);
     }
 
     public void addItem(Notatka item) {
         notatki.add(item);
+        long id = notatkiViewModel.insert(item);
+        item.setId(id);
         notifyItemInserted(notatki.size() - 1);
     }
 
@@ -112,6 +119,7 @@ public class NotatkiAdapter extends RecyclerView.Adapter<NotatkiAdapter.NotatkiV
                 notatka.setWyroznienie(true);
             else
                 notatka.setWyroznienie(false);
+            notatkiViewModel.update(notatka);
         }
         notifyItemRangeChanged(0, notatki.size());
     }

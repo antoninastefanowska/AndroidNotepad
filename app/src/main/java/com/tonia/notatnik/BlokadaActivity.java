@@ -41,17 +41,17 @@ public class BlokadaActivity extends AppCompatActivity {
         FingerprintManager fingerprintManager = (FingerprintManager) getSystemService(FINGERPRINT_SERVICE);
 
         if (!keyguardManager.isKeyguardSecure()) {
-            Toast.makeText(this, R.string.brak_zabezpieczen_msg, Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.brak_zabezpieczen_msg, Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.USE_FINGERPRINT) != PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(this, R.string.brak_czytnika_msg, Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.brak_czytnika_msg, Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (!fingerprintManager.hasEnrolledFingerprints()) {
-            Toast.makeText(this, R.string.brak_odciskow_msg, Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.brak_odciskow_msg, Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -76,7 +76,7 @@ public class BlokadaActivity extends AppCompatActivity {
             keyGenerator = KeyGenerator.getInstance(KeyProperties.KEY_ALGORITHM_AES, "AndroidKeyStore");
         }
         catch (NoSuchAlgorithmException | NoSuchProviderException e) {
-            Toast.makeText(this, R.string.brak_instancji_msg, Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.brak_instancji_msg, Toast.LENGTH_SHORT).show();
             throw new RuntimeException(e);
         }
         try {

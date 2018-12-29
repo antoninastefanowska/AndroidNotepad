@@ -37,7 +37,6 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
                     android:orientation="horizontal">
 
                     <Button
@@ -81,6 +80,16 @@
                         android:onClick="btWyroznij_onClick" />
 
                     <Button
+                        android:id="@+id/btSzczegoly"
+                        android:layout_width="@dimen/icon_size"
+                        android:layout_height="@dimen/icon_size"
+                        android:layout_margin="@dimen/margin_small"
+                        android:enabled="@{zaznaczoneNotatki == 1}"
+                        android:tooltipText="@string/szczegoly_btn"
+                        android:background="@drawable/button_info"
+                        android:onClick="btSzczegoly_onClick" />
+
+                    <Button
                         android:id="@+id/btSzukaj"
                         android:layout_width="@dimen/icon_size"
                         android:layout_height="@dimen/icon_size"
@@ -97,7 +106,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/margin_big"
-                android:background="@drawable/layout_bg"
+                android:background="@drawable/background_layout"
                 android:clipChildren="true"
                 android:scrollbars="vertical"
                 android:adapter="@{notatkiAdapter}" >

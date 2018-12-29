@@ -13,7 +13,7 @@ public interface KategorieDao {
     LiveData<List<Kategoria>> getKategorie();
 
     @Query("SELECT * FROM kategoria WHERE id = :id")
-    Kategoria getKategoria(long id);
+    LiveData<Kategoria> getKategoria(long id);
 
     @Insert
     void insert(List<Kategoria> kategorie);
