@@ -4,11 +4,14 @@ import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.CalendarView;
 import android.widget.Spinner;
 
 import com.tonia.notatnik.Filtr;
@@ -16,6 +19,8 @@ import com.tonia.notatnik.R;
 import com.tonia.notatnik.databinding.ActivitySzukajBinding;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class SzukajActivity extends AppCompatActivity {
@@ -25,6 +30,7 @@ public class SzukajActivity extends AppCompatActivity {
     private List<Kategoria> kategorie;
     private KategorieAdapter kategorieAdapter;
     private KategorieViewModel kategorieViewModel;
+    private CalendarView poleDataUtworzeniaOd, poleDataUtworzeniaDo, poleDataModyfikacjiOd, poleDataModyfikacjiDo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +66,42 @@ public class SzukajActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
+        });
+
+        poleDataUtworzeniaOd = (CalendarView)findViewById(R.id.cvDataUtworzeniaOd);
+        poleDataUtworzeniaDo = (CalendarView)findViewById(R.id.cvDataUtworzeniaDo);
+        poleDataModyfikacjiDo = (CalendarView)findViewById(R.id.cvDataModyfikacjiOd);
+        poleDataModyfikacjiOd = (CalendarView)findViewById(R.id.cvDataModyfikacjiDo);
+
+        poleDataUtworzeniaOd.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(year, month, dayOfMonth, 0, 0, 0);
+                filtr.setDataUtworzeniaOd(calendar.getTimeInMillis());
+            }
+        });
+        poleDataUtworzeniaDo.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(year, month, dayOfMonth, 0, 0, 0);
+                filtr.setDataUtworzeniaDo(calendar.getTimeInMillis());
+            }
+        });
+        poleDataModyfikacjiOd.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(year, month, dayOfMonth, 0, 0, 0);
+                filtr.setDataModyfikacjiOd(calendar.getTimeInMillis());            }
+        });
+        poleDataModyfikacjiDo.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(year, month, dayOfMonth, 0, 0, 0);
+                filtr.setDataModyfikacjiDo(calendar.getTimeInMillis());            }
         });
     }
 

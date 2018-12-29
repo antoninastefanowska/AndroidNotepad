@@ -35,17 +35,21 @@
 
                     <Button
                         android:id="@+id/btZatwierdz"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/icon_size"
+                        android:layout_height="@dimen/icon_size"
+                        android:layout_margin="@dimen/margin_small"
+                        android:background="@drawable/button_checkmark"
                         android:onClick="btZatwierdz_onClick"
-                        android:text="@string/zatwierdz_btn" />
+                        android:tooltipText="@string/zatwierdz_btn" />
 
                     <Button
                         android:id="@+id/btAnuluj"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/icon_size"
+                        android:layout_height="@dimen/icon_size"
+                        android:layout_margin="@dimen/margin_small"
+                        android:background="@drawable/button_cross"
                         android:onClick="btAnuluj_onClick"
-                        android:text="@string/anuluj_btn" />
+                        android:tooltipText="@string/anuluj_btn" />
 
                 </LinearLayout>
 
@@ -53,7 +57,8 @@
 
             <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:scrollbars="none" >
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -224,7 +229,7 @@
                                 android:id="@+id/cvDataUtworzeniaOd"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:date="@={filtr.dataUtworzeniaOd}"
+                                android:date="@{filtr.dataUtworzeniaOd}"
                                 android:foregroundGravity="center"
                                 android:visibility="@{filtr.dataUtworzeniaOdWarunek ? View.VISIBLE : View.GONE}" />
 
@@ -239,7 +244,7 @@
                                 android:id="@+id/cvDataUtworzeniaDo"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:date="@={filtr.dataUtworzeniaDo}"
+                                android:date="@{filtr.dataUtworzeniaDo}"
                                 android:foregroundGravity="center"
                                 android:visibility="@{filtr.dataUtworzeniaDoWarunek ? View.VISIBLE : View.GONE}" />
 
@@ -274,7 +279,7 @@
                                 android:id="@+id/cvDataModyfikacjiOd"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:date="@={filtr.dataModyfikacjiOd}"
+                                android:date="@{filtr.dataModyfikacjiOd}"
                                 android:foregroundGravity="center"
                                 android:visibility="@{filtr.dataModyfikacjiOdWarunek ? View.VISIBLE : View.GONE}" />
 
@@ -289,7 +294,7 @@
                                 android:id="@+id/cvDataModyfikacjiDo"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:date="@={filtr.dataModyfikacjiDo}"
+                                android:date="@{filtr.dataModyfikacjiDo}"
                                 android:foregroundGravity="center"
                                 android:visibility="@{filtr.dataModyfikacjiDoWarunek ? View.VISIBLE : View.GONE}" />
 
