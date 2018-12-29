@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.databinding.Observable;
 import android.graphics.Typeface;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
@@ -40,7 +39,6 @@ public class EdytujActivity extends AppCompatActivity {
     private List<Kategoria> kategorie;
     private KategorieAdapter kategorieAdapter;
     private AlertDialog ostrzezenie;
-    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

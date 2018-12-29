@@ -1,5 +1,6 @@
 package com.tonia.notatnik;
 
+import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
@@ -13,7 +14,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -40,8 +40,6 @@ public class NotatnikActivity extends AppCompatActivity {
     private Observer<List<Notatka>> obserwator1, obserwator2;
     private Context context;
 
-    private NotatkiController notatkiController;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +65,7 @@ public class NotatnikActivity extends AppCompatActivity {
         notatkiRecyclerView = (RecyclerView) findViewById(R.id.rvNotatki);
         notatkiRecyclerView.setHasFixedSize(true);
         notatkiRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        notatkiAdapter = new NotatkiAdapter(getApplication(), notatki, notatkiViewModel);
+        notatkiAdapter = new NotatkiAdapter(notatki, notatkiViewModel);
 
         binding.setZaznaczoneNotatki(notatkiAdapter.getZaznaczoneNotatki().size());
         binding.setNotatkiAdapter(notatkiAdapter);
@@ -187,6 +185,7 @@ public class NotatnikActivity extends AppCompatActivity {
                     Button btSzukaj = (Button) findViewById(R.id.btSzukaj);
                     btSzukaj.setPressed(true);
 
+                    final LiveData<List<Notatka>> wynikSzukania = notatkiViewModel.search(query);
                     obserwator2 = new Observer<List<Notatka>>() {
                         @Override
                         public void onChanged(@Nullable final List<Notatka> zaladowaneNotatki) {
@@ -198,11 +197,10 @@ public class NotatnikActivity extends AppCompatActivity {
                             String message = getResources().getQuantityString(R.plurals.znaleziono_msg, przefiltrowaneNotatki.size(), przefiltrowaneNotatki.size());
                             Toast toast = Toast.makeText(context, message, Toast.LENGTH_SHORT);
                             toast.show();
-                            notatkiViewModel.search(query).removeObserver(obserwator2);
+                            wynikSzukania.removeObserver(obserwator2);
                         }
                     };
-
-                    notatkiViewModel.search(query).observe(this, obserwator2);
+                    wynikSzukania.observe(this, obserwator2);
                 }
                 break;
             }

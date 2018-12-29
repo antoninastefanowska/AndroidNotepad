@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.tonia.notatnik">
 
-    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.USE_FINGERPRINT" />
 
     <application
@@ -15,14 +14,14 @@
         <activity android:name=".NotatnikActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.VIEW" />
             </intent-filter>
         </activity>
         <activity android:name=".EdytujActivity" />
         <activity android:name=".SzukajActivity" />
         <activity android:name=".BlokadaActivity" />
-        <activity android:name=".SzczegolyActivity"></activity>
+        <activity android:name=".SzczegolyActivity" />
     </application>
 
 </manifest>

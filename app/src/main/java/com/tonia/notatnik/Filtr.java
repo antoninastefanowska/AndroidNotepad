@@ -2,7 +2,6 @@ package com.tonia.notatnik;
 
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
-import android.util.Log;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -329,8 +328,6 @@ public class Filtr extends BaseObservable implements Serializable {
             queryBuilder.append(" AND ");
             queryBuilder.append(conditions.get(i));
         }
-
-        Log.d("zapytanie", queryBuilder.toString());
 
         return queryBuilder.toString();
     }

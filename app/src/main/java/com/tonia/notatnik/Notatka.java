@@ -7,12 +7,8 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 import android.arch.persistence.room.Ignore;
-import android.databinding.InverseBindingAdapter;
 import android.text.Html;
 import android.text.SpannableString;
-import android.text.Spanned;
-
-import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 import java.text.DateFormat;
@@ -23,39 +19,30 @@ import java.util.Calendar;
 @Entity(tableName = "notatka", foreignKeys = @ForeignKey(entity = Kategoria.class, parentColumns = "id", childColumns = "kategoria_id"))
 public class Notatka extends BaseObservable implements Serializable {
     @PrimaryKey(autoGenerate = true)
-    @SerializedName("id")
     private long id;
 
     @ColumnInfo(name = "tytul")
-    @SerializedName("tytul")
     private String tytul;
 
     @ColumnInfo(name = "autor")
-    @SerializedName("autor")
     private String autor;
 
     @ColumnInfo(name = "tekst")
-    @SerializedName("tekst")
     private String tekst;
 
     @ColumnInfo(name = "kategoria_id")
-    @SerializedName("kategoria")
     private long kategoriaId;
 
     @ColumnInfo(name = "data_utworzenia")
-    @SerializedName("data_utworzenia")
     private Date dataUtworzenia;
 
     @ColumnInfo(name = "data_modyfikacji")
-    @SerializedName("data_modyfikacji")
     private Date dataModyfikacji;
 
     @ColumnInfo(name = "wyroznienie")
-    @SerializedName("wyroznienie")
     private boolean wyroznienie;
 
     @Ignore
-    @SerializedName("ikonka")
     private String ikonka;
 
     @ColumnInfo(name = "zablokowana")
@@ -165,8 +152,8 @@ public class Notatka extends BaseObservable implements Serializable {
     public String skroconyTekst() {
         SpannableString tekst = new SpannableString(Html.fromHtml(this.tekst, 0));
         String s = tekst.toString().replace("\n", " ");
-        if (tekst.toString().length() >= 50)
-            return s.substring(0, 50) + "...";
+        if (tekst.toString().length() >= 80)
+            return s.substring(0, 80) + "...";
         else
             return s;
     }

@@ -11,8 +11,6 @@ import android.widget.TextView;
 
 import com.tonia.notatnik.databinding.ActivitySzczegolyBinding;
 
-import java.util.List;
-
 public class SzczegolyActivity extends AppCompatActivity {
     private static final int ODBLOKUJ = 0;
     private ActivitySzczegolyBinding binding;
