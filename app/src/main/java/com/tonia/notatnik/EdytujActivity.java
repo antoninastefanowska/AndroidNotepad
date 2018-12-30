@@ -2,7 +2,6 @@ package com.tonia.notatnik;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
@@ -13,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.Html;
+import android.text.SpanWatcher;
 import android.text.SpannableString;
 import android.text.TextWatcher;
 import android.text.style.StyleSpan;
@@ -20,7 +20,6 @@ import android.text.style.UnderlineSpan;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.tonia.notatnik.databinding.ActivityEdytujBinding;
@@ -31,14 +30,15 @@ import java.util.List;
 public class EdytujActivity extends AppCompatActivity {
     private final static int ZABLOKUJ = 0, ODBLOKUJ = 1, USUN_BLOKADE = 2;
     private Notatka notatka;
-    private Button przyciskZapisz, przyciskOdrzuc;
-    private EditText poleTekst;
+    private EditTextSelectable poleTekst;
     private Spinner poleKategoria;
     private ActivityEdytujBinding binding;
     private KategorieViewModel kategorieViewModel;
     private List<Kategoria> kategorie;
     private KategorieAdapter kategorieAdapter;
     private AlertDialog ostrzezenie;
+    private SpanWatcher spanWatcher;
+    private Button przyciskPogrubienie, przyciskKursywa, przyciskPodkreslenie;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,10 +71,7 @@ public class EdytujActivity extends AppCompatActivity {
             }
         });
 
-        przyciskZapisz = (Button)findViewById(R.id.btZapisz);
-        przyciskOdrzuc = (Button)findViewById(R.id.btAnuluj);
-        poleTekst = (EditText)findViewById(R.id.etTekst);
-
+        poleTekst = (EditTextSelectable)findViewById(R.id.etTekst);
         TextWatcher textWatcher = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -84,6 +81,7 @@ public class EdytujActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 notatka.setTekst(Html.toHtml(poleTekst.getText(), 0));
+                //poleTekst.getText().setSpan(spanWatcher, 0, 0, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
             }
 
             @Override
@@ -125,6 +123,11 @@ public class EdytujActivity extends AppCompatActivity {
             }
         });
         ostrzezenie = alertDialogBuilder.create();
+
+        przyciskPogrubienie = (Button)findViewById(R.id.btPogrubienie);
+        przyciskKursywa = (Button)findViewById(R.id.btKursywa);
+        przyciskPodkreslenie = (Button)findViewById(R.id.btPodkreslenie);
+        poleTekst.setButtons(przyciskPogrubienie, przyciskKursywa, przyciskPodkreslenie);
     }
 
     @Override

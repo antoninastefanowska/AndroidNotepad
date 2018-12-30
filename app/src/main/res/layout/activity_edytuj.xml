@@ -57,6 +57,7 @@
                         android:layout_width="@dimen/icon_size"
                         android:layout_height="@dimen/icon_size"
                         android:layout_margin="@dimen/margin_small"
+                        android:enabled="false"
                         android:onClick="btPogrubienie_onClick"
                         android:tooltipText="@string/pogrubienie_btn"
                         android:background="@drawable/button_bold" />
@@ -66,6 +67,7 @@
                         android:layout_width="@dimen/icon_size"
                         android:layout_height="@dimen/icon_size"
                         android:layout_margin="@dimen/margin_small"
+                        android:enabled="false"
                         android:onClick="btKursywa_onClick"
                         android:tooltipText="@string/kursywa_btn"
                         android:background="@drawable/button_italic" />
@@ -75,6 +77,7 @@
                         android:layout_width="@dimen/icon_size"
                         android:layout_height="@dimen/icon_size"
                         android:layout_margin="@dimen/margin_small"
+                        android:enabled="false"
                         android:onClick="btPodkreslenie_onClick"
                         android:tooltipText="@string/podkreslenie_btn"
                         android:background="@drawable/button_underline" />
@@ -174,7 +177,7 @@
                 </TableRow>
             </TableLayout>
 
-            <EditText
+            <com.tonia.notatnik.EditTextSelectable
                 android:id="@+id/etTekst"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
