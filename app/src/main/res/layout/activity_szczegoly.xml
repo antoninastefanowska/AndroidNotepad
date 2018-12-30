@@ -49,6 +49,7 @@
                                 android:layout_column="0"
                                 android:layout_margin="@dimen/margin_small"
                                 android:text="@string/tytul"
+                                android:textColor="@color/colorPrimary"
                                 android:textSize="@dimen/text_size_big" />
 
                             <TextView
@@ -60,6 +61,7 @@
                                 android:layout_columnWeight="2"
                                 android:layout_margin="@dimen/margin_small"
                                 android:text="@{notatka.tytul}"
+                                android:textColor="@color/colorPrimary"
                                 android:textSize="@dimen/text_size_big"
                                 android:textStyle="bold" />
 
@@ -70,6 +72,7 @@
                                 android:layout_column="0"
                                 android:layout_margin="@dimen/margin_small"
                                 android:text="@string/autor"
+                                android:textColor="@color/colorPrimary"
                                 android:textSize="@dimen/text_size_big" />
 
                             <TextView
@@ -80,6 +83,7 @@
                                 android:layout_columnWeight="2"
                                 android:layout_margin="@dimen/margin_small"
                                 android:text="@{notatka.autor}"
+                                android:textColor="@color/colorPrimary"
                                 android:textSize="@dimen/text_size_big"
                                 android:textStyle="bold" />
 
@@ -90,6 +94,7 @@
                                 android:layout_column="0"
                                 android:layout_margin="@dimen/margin_small"
                                 android:text="@string/kategoria"
+                                android:textColor="@color/colorPrimary"
                                 android:textSize="@dimen/text_size_big" />
 
                             <TextView
@@ -100,6 +105,7 @@
                                 android:layout_column="1"
                                 android:layout_columnWeight="2"
                                 android:layout_margin="@dimen/margin_small"
+                                android:textColor="@color/colorPrimary"
                                 android:textSize="@dimen/text_size_big"
                                 android:textStyle="bold" />
 
@@ -110,6 +116,7 @@
                                 android:layout_column="0"
                                 android:layout_margin="@dimen/margin_small"
                                 android:text="@string/datautworzenia_cb"
+                                android:textColor="@color/colorPrimary"
                                 android:textSize="@dimen/text_size_big" />
 
                             <TextView
@@ -120,6 +127,7 @@
                                 android:layout_columnWeight="2"
                                 android:layout_margin="@dimen/margin_small"
                                 android:text="@{notatka.getDataUtworzeniaString()}"
+                                android:textColor="@color/colorPrimary"
                                 android:textSize="@dimen/text_size_big"
                                 android:textStyle="bold" />
 
@@ -141,6 +149,7 @@
                                 android:layout_columnWeight="2"
                                 android:layout_margin="@dimen/margin_small"
                                 android:text="@{notatka.getDataModyfikacjiString()}"
+                                android:textColor="@color/colorPrimary"
                                 android:textSize="@dimen/text_size_big"
                                 android:textStyle="bold" />
 
@@ -151,6 +160,7 @@
                                 android:layout_column="0"
                                 android:layout_margin="@dimen/margin_small"
                                 android:text="@string/wyroznienie_cb"
+                                android:textColor="@color/colorPrimary"
                                 android:textSize="@dimen/text_size_big" />
 
                             <TextView
@@ -161,6 +171,7 @@
                                 android:layout_columnWeight="2"
                                 android:layout_margin="@dimen/margin_small"
                                 android:text="@{notatka.getWyroznienie() ? @string/tak : @string/nie}"
+                                android:textColor="@color/colorPrimary"
                                 android:textSize="@dimen/text_size_big"
                                 android:textStyle="bold" />
 
@@ -179,6 +190,7 @@
                         android:layout_height="match_parent"
                         android:layout_margin="@dimen/margin_small"
                         android:text="@{Html.fromHtml(notatka.getTekst())}"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="@dimen/text_size_big" />
 
                 </LinearLayout>
