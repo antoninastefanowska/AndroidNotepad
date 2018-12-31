@@ -57,4 +57,5 @@
     <string name="autentykacja_pomyslna_msg">Authentication succeed</string>
     <string name="dotknij_czujnika">Touch sensor</string>
     <string name="tresc_zablokowana">[CONTENT HIDDEN]</string>
+    <string name="stara_wersja_msg">Function unavaible for this Android version</string>
 </resources>

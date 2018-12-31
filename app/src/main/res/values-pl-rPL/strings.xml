@@ -60,4 +60,5 @@
     <string name="autentykacja_pomyslna_msg">Autentykacja pomyślna</string>
     <string name="dotknij_czujnika">Dotknij czujnika</string>
     <string name="tresc_zablokowana">[TREŚĆ UKRYTA]</string>
+    <string name="stara_wersja_msg">Funkcja niedostępna dla tej wersji Androida</string>
 </resources>

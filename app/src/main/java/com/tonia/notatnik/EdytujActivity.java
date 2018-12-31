@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +22,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.tonia.notatnik.databinding.ActivityEdytujBinding;
 
@@ -146,8 +148,13 @@ public class EdytujActivity extends AppCompatActivity {
     }
 
     public void btZablokuj_onClick(View view) {
-        Intent blokada = new Intent(EdytujActivity.this, BlokadaActivity.class);
-        startActivityForResult(blokada, ZABLOKUJ);
+        if (Build.VERSION.SDK_INT < 23) {
+            Toast.makeText(this, R.string.stara_wersja_msg, Toast.LENGTH_SHORT).show();
+        }
+        else {
+            Intent blokada = new Intent(EdytujActivity.this, BlokadaActivity.class);
+            startActivityForResult(blokada, ZABLOKUJ);
+        }
     }
 
     public void btOdblokuj_onClick(View view) {
