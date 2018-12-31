@@ -37,22 +37,22 @@ public class BlokadaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_blokada);
 
-        KeyguardManager keyguardManager = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
-        FingerprintManager fingerprintManager = (FingerprintManager) getSystemService(FINGERPRINT_SERVICE);
+        KeyguardManager keyguardManager = (KeyguardManager)getSystemService(KEYGUARD_SERVICE);
+        FingerprintManager fingerprintManager = (FingerprintManager)getSystemService(FINGERPRINT_SERVICE);
 
         if (!keyguardManager.isKeyguardSecure()) {
             Toast.makeText(this, R.string.brak_zabezpieczen_msg, Toast.LENGTH_SHORT).show();
-            return;
+            finish();
         }
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.USE_FINGERPRINT) != PackageManager.PERMISSION_GRANTED) {
             Toast.makeText(this, R.string.brak_czytnika_msg, Toast.LENGTH_SHORT).show();
-            return;
+            finish();
         }
 
         if (!fingerprintManager.hasEnrolledFingerprints()) {
             Toast.makeText(this, R.string.brak_odciskow_msg, Toast.LENGTH_SHORT).show();
-            return;
+            finish();
         }
 
         generateKey();

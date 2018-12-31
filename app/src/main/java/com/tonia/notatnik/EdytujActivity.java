@@ -80,8 +80,7 @@ public class EdytujActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                notatka.setTekst(Html.toHtml(poleTekst.getText(), 0));
-                //poleTekst.getText().setSpan(spanWatcher, 0, 0, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+                notatka.setTekst(Html.toHtml(poleTekst.getText()));
             }
 
             @Override

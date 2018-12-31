@@ -143,7 +143,7 @@ public class Notatka extends BaseObservable implements Serializable {
     }
 
     public String skroconyTekst() {
-        SpannableString tekst = new SpannableString(Html.fromHtml(this.tekst, 0));
+        SpannableString tekst = new SpannableString(Html.fromHtml(this.tekst));
         String s = tekst.toString();
         if (s.length() >= 80)
             return s.substring(0, 80).replace("\n", " ") + "...";
